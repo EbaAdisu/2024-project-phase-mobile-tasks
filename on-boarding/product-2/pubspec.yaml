@@ -1,0 +1,12 @@
+name: my_project
+description: A simple Dart project.
+
+environment:
+    sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+    test: ^1.25.8
+    # Your package dependencies
+
+dev_dependencies:
+    # Your development dependencies
