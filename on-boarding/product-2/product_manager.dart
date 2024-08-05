@@ -19,18 +19,21 @@ class ProductManager {
 
   void viewAllProducts() {
     _products.forEach((key, value) {
+      print("");
       print("Product Name: ${value.productName}");
       print("Product Price: ${value.productPrice}");
       print("Product Description: ${value.productDescription}");
-      print("-------------------------------");
+      print("");
     });
   }
 
   void viewSingleProduct(String name) {
     if (_products.containsKey(name)) {
+      print("");
       print("Product Name: ${_products[name]?.productName}");
       print("Product Price: ${_products[name]?.productPrice}");
       print("Product Description: ${_products[name]?.productDescription}");
+      print("");
     } else {
       print("Product not found");
     }
