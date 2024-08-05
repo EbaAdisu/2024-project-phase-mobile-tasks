@@ -54,7 +54,6 @@ class ProductManager {
     }
   }
 
-  // add a method to remove a product
   void removeProduct(Product product) {
     if (_products.containsKey(product.productName)) {
       _products.remove(product.productName);
@@ -62,8 +61,4 @@ class ProductManager {
       print("Product not found");
     }
   }
-}
-
-void main() {
-  print("Hello World");
 }
