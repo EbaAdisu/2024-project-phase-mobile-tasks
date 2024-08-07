@@ -5,6 +5,7 @@ Task 6: Implementing a Flutter User Interface
 ## Objective:
 
 Create a Flutter user interface that replicates the design of a provided picture.
+[Figma Link](https://www.figma.com/file/957Md2CrZ2B9KGjHy8RDcH/Internship?type=design&node-id=1%3A48&mode=design&t=dGzOJNr9pjkmYQog-1)
 
 ## Screenshots
 
