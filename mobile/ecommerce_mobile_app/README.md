@@ -4,7 +4,13 @@ This is an E-commerce mobile application built with Flutter. The application pro
 
 ## Directory Structure
 
-The project is organized into two main directories: `widgets` and `screens`.
+The project is organized into three main directories: `models`,`widgets` and `screens`.
+
+### Models
+
+The models directory contains the data models used in the application. These models define the structure of the objects used in the application, particularly those related to products. For these project there is only one object in models:
+
+-   `product.dart`: This file defines the Product model. This model represents a product in the e-commerce application, with properties such as name, description, price, rate, and category.
 
 ### Widgets
 
