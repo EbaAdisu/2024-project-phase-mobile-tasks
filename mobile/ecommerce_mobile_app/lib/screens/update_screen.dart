@@ -1,14 +1,15 @@
-import 'package:ecommerce_mobile_app/widgets/form_button.dart';
-import 'package:ecommerce_mobile_app/widgets/form_text_field.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/form_button.dart';
+import '../widgets/form_text_field.dart';
 
 class UpdateScreen extends StatelessWidget {
   UpdateScreen({super.key});
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

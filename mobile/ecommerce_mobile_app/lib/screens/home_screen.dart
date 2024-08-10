@@ -1,6 +1,7 @@
-import 'package:ecommerce_mobile_app/model/product.dart';
-import 'package:ecommerce_mobile_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+
+import '../model/product.dart';
+import '../widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -113,7 +114,7 @@ class _HomeScreen1State extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                trailing: Container(
+                trailing: SizedBox(
                   height: 50,
                   width: 50,
                   child: AspectRatio(
@@ -146,7 +147,7 @@ class _HomeScreen1State extends State<HomeScreen> {
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     )),
-                trailing: Container(
+                trailing: SizedBox(
                   height: 50,
                   width: 50,
                   child: AspectRatio(

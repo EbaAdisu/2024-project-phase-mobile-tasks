@@ -1,5 +1,6 @@
-import 'package:ecommerce_mobile_app/model/product.dart';
 import 'package:flutter/material.dart';
+
+import '../model/product.dart';
 
 class ProductActionButton extends StatelessWidget {
   Product? product;

@@ -1,6 +1,7 @@
-import 'package:ecommerce_mobile_app/model/product.dart';
-import 'package:ecommerce_mobile_app/widgets/product_action_button.dart';
 import 'package:flutter/material.dart';
+
+import '../model/product.dart';
+import '../widgets/product_action_button.dart';
 
 class DetailScreen extends StatelessWidget {
   DetailScreen({super.key});
@@ -56,7 +57,7 @@ class DetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${product.category}',
+                        product.category,
                         style: TextStyle(
                           color: Colors.grey.shade500,
                           fontSize: 16,
@@ -87,7 +88,7 @@ class DetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         product.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -95,7 +96,7 @@ class DetailScreen extends StatelessWidget {
                       ),
                       Text(
                         '\$${product.price}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -158,7 +159,7 @@ class DetailScreen extends StatelessWidget {
                     height: 30,
                   ),
                   Text(
-                    '${product.description}',
+                    product.description,
                     style: TextStyle(
                       color: Colors.grey.shade800,
                       fontSize: 16,
@@ -172,7 +173,7 @@ class DetailScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         height: 100,
         color: Colors.transparent,
         child: Row(
