@@ -8,7 +8,7 @@ import 'dart:convert' as _i8;
 import 'dart:typed_data' as _i10;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:ecommerce_app/domain/entities/error/failure.dart' as _i6;
+import 'package:ecommerce_app/core/error/failure.dart' as _i6;
 import 'package:ecommerce_app/domain/entities/product.dart' as _i7;
 import 'package:ecommerce_app/domain/repositories/product_repository.dart'
     as _i4;
