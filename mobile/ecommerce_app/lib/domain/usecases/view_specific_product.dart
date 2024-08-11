@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../core/error/failure.dart';
-import '../entities/product.dart';
+import '../entities/product_entity.dart';
 import '../repositories/product_repository.dart';
 
 class ViewProductUsecase {
@@ -9,7 +9,7 @@ class ViewProductUsecase {
 
   ViewProductUsecase(this.productRepository);
 
-  Future<Either<Failure, Product>> call(String productId) async {
+  Future<Either<Failure, ProductEntity>> call(String productId) async {
     return await productRepository.getProduct(productId);
   }
 }

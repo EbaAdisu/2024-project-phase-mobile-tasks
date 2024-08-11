@@ -9,7 +9,7 @@ import 'dart:typed_data' as _i10;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ecommerce_app/core/error/failure.dart' as _i6;
-import 'package:ecommerce_app/domain/entities/product.dart' as _i7;
+import 'package:ecommerce_app/domain/entities/product_entity.dart' as _i7;
 import 'package:ecommerce_app/domain/repositories/product_repository.dart'
     as _i4;
 import 'package:http/http.dart' as _i3;
@@ -69,22 +69,23 @@ class MockProductRepository extends _i1.Mock implements _i4.ProductRepository {
   }
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.Product>> createProduct(
-          _i7.Product? product) =>
+  _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>> createProduct(
+          _i7.ProductEntity? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #createProduct,
           [product],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>.value(
-            _FakeEither_0<_i6.Failure, _i7.Product>(
+        returnValue:
+            _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>>.value(
+                _FakeEither_0<_i6.Failure, _i7.ProductEntity>(
           this,
           Invocation.method(
             #createProduct,
             [product],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>);
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>>);
 
   @override
   _i5.Future<_i2.Either<_i6.Failure, void>> deleteProduct(String? id) =>
@@ -104,57 +105,60 @@ class MockProductRepository extends _i1.Mock implements _i4.ProductRepository {
       ) as _i5.Future<_i2.Either<_i6.Failure, void>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.Product>> getProduct(String? id) =>
+  _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>> getProduct(
+          String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getProduct,
           [id],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>.value(
-            _FakeEither_0<_i6.Failure, _i7.Product>(
+        returnValue:
+            _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>>.value(
+                _FakeEither_0<_i6.Failure, _i7.ProductEntity>(
           this,
           Invocation.method(
             #getProduct,
             [id],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>);
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, List<_i7.Product>>> getProducts() =>
+  _i5.Future<_i2.Either<_i6.Failure, List<_i7.ProductEntity>>> getProducts() =>
       (super.noSuchMethod(
         Invocation.method(
           #getProducts,
           [],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, List<_i7.Product>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i7.Product>>(
+            _i5.Future<_i2.Either<_i6.Failure, List<_i7.ProductEntity>>>.value(
+                _FakeEither_0<_i6.Failure, List<_i7.ProductEntity>>(
           this,
           Invocation.method(
             #getProducts,
             [],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.Product>>>);
+      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.ProductEntity>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.Product>> updateProduct(
-          _i7.Product? product) =>
+  _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>> updateProduct(
+          _i7.ProductEntity? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateProduct,
           [product],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>.value(
-            _FakeEither_0<_i6.Failure, _i7.Product>(
+        returnValue:
+            _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>>.value(
+                _FakeEither_0<_i6.Failure, _i7.ProductEntity>(
           this,
           Invocation.method(
             #updateProduct,
             [product],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>);
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.ProductEntity>>);
 }
 
 /// A class which mocks [Client].

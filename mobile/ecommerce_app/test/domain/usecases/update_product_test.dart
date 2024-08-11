@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/domain/entities/product.dart';
+import 'package:ecommerce_app/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/domain/usecases/update_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -13,7 +13,7 @@ void main() {
     mockProductRepository = MockProductRepository();
     updateProductUsecase = UpdateProductUsecase(mockProductRepository);
   });
-  const testproduct = Product(
+  const testproduct = ProductEntity(
     id: '1',
     name: 'product',
     price: 100,
