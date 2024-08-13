@@ -25,7 +25,7 @@ void main() {
       // arrange
       final Map<String, dynamic> jsonMap = json.decode(
         readJson(
-          'helpers/dummy_data/dummy_product_response.json',
+          'dummy_product_response.json',
         ),
       );
 

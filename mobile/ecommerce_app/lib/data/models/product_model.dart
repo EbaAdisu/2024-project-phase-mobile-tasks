@@ -29,4 +29,19 @@ class ProductModel extends ProductEntity {
         'price': price,
         'imageUrl': imageUrl,
       };
+
+  static ProductModel toModel(ProductEntity entity) => ProductModel(
+        id: entity.id,
+        name: entity.name,
+        description: entity.description,
+        price: entity.price,
+        imageUrl: entity.imageUrl,
+      );
+  ProductEntity toEntity() => ProductEntity(
+        id: id,
+        name: name,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
+      );
 }
