@@ -26,7 +26,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       body: product.toJson(),
     );
     if (response.statusCode == 201) {
-      return ProductModel.fromJson(json.decode(response.body));
+      return ProductModel.fromJson(json.decode(response.body)['data']);
     } else {
       throw ServerException();
     }
@@ -48,7 +48,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   Future<ProductModel> getProduct(String id) async {
     final response = await client.get(Uri.parse(Urls.productId(id)));
     if (response.statusCode == 200) {
-      return ProductModel.fromJson(json.decode(response.body));
+      return ProductModel.fromJson(json.decode(response.body)['data']);
     } else {
       throw ServerException();
     }
@@ -58,7 +58,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   Future<List<ProductModel>> getProducts() async {
     final response = await client.get(Uri.parse(Urls.product()));
     if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
+      final List<dynamic> jsonData = json.decode(response.body)['data'];
       return jsonData
           .map((jsonItem) => ProductModel.fromJson(jsonItem))
           .toList();
@@ -76,7 +76,60 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       body: product.toJson(),
     );
     if (response.statusCode == 200) {
-      return ProductModel.fromJson(json.decode(response.body));
+      return ProductModel.fromJson(json.decode(response.body)['data']);
+    } else {
+      throw ServerException();
+    }
+  }
+}
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class ImageTempRemoteDataSourceImpl {
+  Future<ProductModel> createProduct(ProductModel product) async {
+    var request = http.MultipartRequest('POST', Uri.parse(Urls.product()));
+
+    request.fields['id'] = product.id;
+    request.fields['name'] = product.name;
+    request.fields['description'] = product.description;
+    request.fields['price'] = product.price.toString();
+    request.fields['imageUrl'] = product.imageUrl;
+
+    request.files
+        .add(await http.MultipartFile.fromPath('image', product.imageUrl));
+
+    var response = await request.send();
+
+    if (response.statusCode == 201) {
+      var responseData = await response.stream.bytesToString();
+      return ProductModel.fromJson(json.decode(responseData));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<ProductModel> updateProduct(ProductModel product) async {
+    var request =
+        http.MultipartRequest('PUT', Uri.parse(Urls.product() + product.id));
+
+    request.fields['id'] = product.id;
+    request.fields['name'] = product.name;
+    request.fields['description'] = product.description;
+    request.fields['price'] = product.price.toString();
+    request.fields['imageUrl'] = product.imageUrl;
+
+    request.files
+        .add(await http.MultipartFile.fromPath('image', product.imageUrl));
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var responseData = await response.stream.bytesToString();
+      return ProductModel.fromJson(json.decode(responseData));
     } else {
       throw ServerException();
     }

@@ -20,7 +20,8 @@ void main() {
     );
   });
   group('get all products', () {
-    final jsonList = json.decode(readJson('dummy_products_response.json'));
+    final jsonList =
+        json.decode(readJson('dummy_products_response.json'))['data'];
     final testProductModelList =
         (jsonList as List).map((e) => ProductModel.fromJson(e)).toList();
     test('should return list of products when there are products in the cache',
@@ -45,7 +46,8 @@ void main() {
   });
 
   group('Cache all products', () {
-    final jsonList = json.decode(readJson('dummy_products_response.json'));
+    final jsonList =
+        json.decode(readJson('dummy_products_response.json'))['data'];
     final testProductModelList =
         (jsonList as List).map((e) => ProductModel.fromJson(e)).toList();
 

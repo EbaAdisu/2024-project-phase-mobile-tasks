@@ -1,7 +1,11 @@
 {
-    "id": "1",
-    "name": "Product 1",
-    "description": "Description 1",
-    "price": 100.0,
-    "imageUrl": "http://example.com/image1"
+    "statusCode": 200,
+    "message": "",
+    "data": {
+        "id": "1",
+        "name": "Product 1",
+        "description": "Description 1",
+        "price": 100.0,
+        "imageUrl": "http://example.com/image1"
+    }
 }

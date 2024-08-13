@@ -1,16 +1,41 @@
-[
-    {
-        "id": "1",
-        "name": "Product 1",
-        "description": "Description 1",
-        "price": 100.0,
-        "imageUrl": "http://example.com/image1"
-    },
-    {
-        "id": "2",
-        "name": "Product 2",
-        "description": "Description 2",
-        "price": 100.0,
-        "imageUrl": "http://example.com/image2"
-    }
-]
+{
+    "statusCode": 200,
+    "message": "",
+    "data": [
+        {
+            "id": "66b74b9077b59f46dcd3d209",
+            "name": "hawaii",
+            "description": "Explore anime characters addj.",
+            "price": 123.0,
+            "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1723288463/images/qjxar5jtmqlpnwg4fgvx.jpg"
+        },
+        {
+            "id": "66bb0e1b28553d9b523424dd",
+            "name": "Gamming Pc",
+            "description": "long description",
+            "price": 1234.0,
+            "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1723534875/images/tres6dlz6fpus5ddafe6.jpg"
+        },
+        {
+            "id": "66bb120728553d9b52342507",
+            "name": "Gamming Pc",
+            "description": "long description",
+            "price": 1234.0,
+            "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1723535879/images/klynnmsskm9mcmpidyvp.jpg"
+        },
+        {
+            "id": "66bb310cea45a1c5232a78ac",
+            "name": "Ui",
+            "description": "des",
+            "price": 58.0,
+            "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1723543820/images/nbx1bic6aq5hnlflxvwz.jpg"
+        },
+        {
+            "id": "66bb49c5c7f34174630faabe",
+            "name": "Ui",
+            "description": "cgct",
+            "price": 24.0,
+            "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1723550149/images/wuxrqmhzyafiv3jtq1oj.jpg"
+        }
+    ]
+}

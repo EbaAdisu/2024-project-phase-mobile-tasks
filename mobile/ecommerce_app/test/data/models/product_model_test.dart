@@ -27,7 +27,7 @@ void main() {
         readJson(
           'dummy_product_response.json',
         ),
-      );
+      )['data'];
 
       // act
       final result = ProductModel.fromJson(jsonMap);
