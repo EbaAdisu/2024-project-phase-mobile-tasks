@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/constants/constants.dart';
 import '../../core/error/exception.dart';
 import '../models/product_model.dart';
 
@@ -9,8 +10,6 @@ abstract class ProductLocalDataSource {
   Future<List<ProductModel>> getProducts();
   Future<void> cacheProducts(List<ProductModel> posts);
 }
-
-const cachedProducts = 'CACHED_PRODUCTS';
 
 class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   final SharedPreferences sharedPreferences;

@@ -18,7 +18,7 @@ class DeleteProductUsecase extends UseCase<void, Params> {
 class Params extends Equatable {
   final String productId;
 
-  Params({required this.productId});
+  const Params({required this.productId});
 
   @override
   List<Object?> get props => [id];

@@ -24,7 +24,7 @@ void main() {
 
       // act
       final result =
-          await deleteProductUsecase(Params(productId: testPoductId));
+          await deleteProductUsecase(const Params(productId: testPoductId));
 
       // assert
       expect(result, const Right(null));
@@ -40,7 +40,7 @@ void main() {
 
       // act
       final result =
-          await deleteProductUsecase(Params(productId: testPoductId));
+          await deleteProductUsecase(const Params(productId: testPoductId));
 
       // assert
       expect(result, const Left(ServerFailure('error')));

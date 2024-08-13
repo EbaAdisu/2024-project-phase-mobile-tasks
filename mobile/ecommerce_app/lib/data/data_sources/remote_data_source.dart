@@ -22,7 +22,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   @override
   Future<ProductModel> createProduct(ProductModel product) async {
     final response = await client.post(
-      Uri.parse(Urls.Product()),
+      Uri.parse(Urls.product()),
       body: product.toJson(),
     );
     if (response.statusCode == 201) {
@@ -56,7 +56,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<List<ProductModel>> getProducts() async {
-    final response = await client.get(Uri.parse(Urls.Product()));
+    final response = await client.get(Uri.parse(Urls.product()));
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       return jsonData

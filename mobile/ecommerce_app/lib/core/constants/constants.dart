@@ -5,7 +5,9 @@ class Urls {
     return '${baseUrL}products/$id?$apiKey';
   }
 
-  static String Product() {
+  static String product() {
     return '${baseUrL}products?$apiKey';
   }
 }
+
+const cachedProducts = 'CACHED_PRODUCTS';

@@ -30,7 +30,7 @@ void main() {
       // arrange
       when(
         mockHttpClient.post(
-          Uri.parse(Urls.Product()),
+          Uri.parse(Urls.product()),
           body: testProduct.toJson(),
         ),
       ).thenAnswer(
@@ -51,7 +51,7 @@ void main() {
         // arrange
         when(
           mockHttpClient.post(
-            Uri.parse(Urls.Product()),
+            Uri.parse(Urls.product()),
             body: testProduct.toJson(),
           ),
         ).thenAnswer(
@@ -153,7 +153,7 @@ void main() {
         () async {
       // arrange
       when(
-        mockHttpClient.get(Uri.parse(Urls.Product())),
+        mockHttpClient.get(Uri.parse(Urls.product())),
       ).thenAnswer(
         (_) async => http.Response(
           readJson('dummy_products_response.json'),
@@ -171,7 +171,7 @@ void main() {
       () async {
         // arrange
         when(
-          mockHttpClient.get(Uri.parse(Urls.Product())),
+          mockHttpClient.get(Uri.parse(Urls.product())),
         ).thenAnswer(
           (_) async => http.Response(
             'Something went wrong',

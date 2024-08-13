@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ecommerce_app/core/constants/constants.dart';
 import 'package:ecommerce_app/core/error/exception.dart';
 import 'package:ecommerce_app/data/data_sources/local_data_source.dart';
 import 'package:ecommerce_app/data/models/product_model.dart';
@@ -22,7 +23,6 @@ void main() {
     final jsonList = json.decode(readJson('dummy_products_response.json'));
     final testProductModelList =
         (jsonList as List).map((e) => ProductModel.fromJson(e)).toList();
-    const cachedProducts = 'CACHED_PRODUCTS';
     test('should return list of products when there are products in the cache',
         () async {
       // arrange
@@ -48,7 +48,6 @@ void main() {
     final jsonList = json.decode(readJson('dummy_products_response.json'));
     final testProductModelList =
         (jsonList as List).map((e) => ProductModel.fromJson(e)).toList();
-    const cachedProducts = 'CACHED_PRODUCTS';
 
     test('should cache products when products are passed', () async {
       // arrenge
