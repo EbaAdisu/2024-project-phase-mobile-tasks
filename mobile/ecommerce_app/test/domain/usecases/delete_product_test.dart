@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/error/failure.dart';
 import 'package:ecommerce_app/domain/usecases/delete_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -22,10 +23,27 @@ void main() {
           .thenAnswer((_) async => const Right(null));
 
       // act
-      final result = await deleteProductUsecase(testPoductId);
+      final result =
+          await deleteProductUsecase(Params(productId: testPoductId));
 
       // assert
       expect(result, const Right(null));
+    },
+  );
+  // should return failure when product repository return failure
+  test(
+    'should return failure when product repository return failure',
+    () async {
+      // arrange
+      when(mockProductRepository.deleteProduct(testPoductId))
+          .thenAnswer((_) async => const Left(ServerFailure('error')));
+
+      // act
+      final result =
+          await deleteProductUsecase(Params(productId: testPoductId));
+
+      // assert
+      expect(result, const Left(ServerFailure('error')));
     },
   );
 }

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/error/failure.dart';
 import 'package:ecommerce_app/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/domain/usecases/view_specific_product.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,10 +30,26 @@ void main() {
           .thenAnswer((_) async => const Right(testproduct));
 
       // act
-      final result = await viewProductUsecase(testPoductId);
+      final result =
+          await viewProductUsecase(const Params(productId: testPoductId));
 
       // assert
       expect(result, const Right(testproduct));
+    },
+  );
+  test(
+    'should return failure when product repository return failure',
+    () async {
+      // arrange
+      when(mockProductRepository.getProduct(testPoductId))
+          .thenAnswer((_) async => const Left(ServerFailure('error')));
+
+      // act
+      final result =
+          await viewProductUsecase(const Params(productId: testPoductId));
+
+      // assert
+      expect(result, const Left(ServerFailure('error')));
     },
   );
 }
