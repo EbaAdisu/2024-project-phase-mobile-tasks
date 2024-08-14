@@ -18,8 +18,8 @@ class ProductRepositoryImpl extends ProductRepository {
   final ProductLocalDataSource productLocalDataSource;
   final NetworkInfo networkInfo;
 
-  ProductRepositoryImpl(
-    this.networkInfo, {
+  ProductRepositoryImpl({
+    required this.networkInfo,
     required this.productRemoteDataSource,
     required this.productLocalDataSource,
   });

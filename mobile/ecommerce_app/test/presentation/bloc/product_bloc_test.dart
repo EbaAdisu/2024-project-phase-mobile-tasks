@@ -37,11 +37,12 @@ void main() {
     mockViewAllProductsUsecase = MockViewAllProductsUsecase();
     mockUpdateProductUsecase = MockUpdateProductUsecase();
     productBloc = ProductBloc(
-        mockCreateProductUsecase,
-        mockDeleteProductUsecase,
-        mockViewProductUsecase,
-        mockViewAllProductsUsecase,
-        mockUpdateProductUsecase);
+      createProductUsecase: mockCreateProductUsecase,
+      deleteProductUsecase: mockDeleteProductUsecase,
+      viewProductUsecase: mockViewProductUsecase,
+      viewAllProductsUsecase: mockViewAllProductsUsecase,
+      updateProductUsecase: mockUpdateProductUsecase,
+    );
   });
 
   const productEntity = ProductEntity(

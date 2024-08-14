@@ -21,7 +21,7 @@ void main() {
     mockProductLocalDataSource = MockProductLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
     productRepositoryImpl = ProductRepositoryImpl(
-      mockNetworkInfo,
+      networkInfo: mockNetworkInfo,
       productRemoteDataSource: mockProductRemoteDataSource,
       productLocalDataSource: mockProductLocalDataSource,
     );

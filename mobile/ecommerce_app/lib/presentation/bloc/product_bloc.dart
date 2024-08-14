@@ -11,23 +11,23 @@ import 'product_event.dart';
 import 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final create_usecase.CreateProductUsecase _createProductUsecase;
-  final delete_usecase.DeleteProductUsecase _deleteProductUsecase;
-  final view_usecase.ViewProductUsecase _viewProductUsecase;
-  final view_all_usecase.ViewAllProductsUsecase _viewAllProductsUsecase;
-  final update_usecase.UpdateProductUsecase _updateProductUsecase;
+  final create_usecase.CreateProductUsecase createProductUsecase;
+  final delete_usecase.DeleteProductUsecase deleteProductUsecase;
+  final view_usecase.ViewProductUsecase viewProductUsecase;
+  final view_all_usecase.ViewAllProductsUsecase viewAllProductsUsecase;
+  final update_usecase.UpdateProductUsecase updateProductUsecase;
 
-  ProductBloc(
-    this._createProductUsecase,
-    this._deleteProductUsecase,
-    this._viewProductUsecase,
-    this._viewAllProductsUsecase,
-    this._updateProductUsecase,
-  ) : super(InitialState()) {
+  ProductBloc({
+    required this.createProductUsecase,
+    required this.deleteProductUsecase,
+    required this.viewProductUsecase,
+    required this.viewAllProductsUsecase,
+    required this.updateProductUsecase,
+  }) : super(InitialState()) {
     on<GetSingleProductEvent>((event, emit) async {
       emit(LoadingState());
       final result =
-          await _viewProductUsecase(view_usecase.Params(productId: event.id));
+          await viewProductUsecase(view_usecase.Params(productId: event.id));
       result.fold(
         (failure) {
           emit(ErrorState(failure.message));
@@ -40,7 +40,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<CreateProductEvent>(
       (event, emit) async {
         emit(LoadingState());
-        final result = await _createProductUsecase(
+        final result = await createProductUsecase(
             create_usecase.Params(product: event.product));
         result.fold(
           (failure) {
@@ -54,7 +54,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     );
     on<DeleteProductEvent>((event, emit) async {
       emit(LoadingState());
-      final result = await _deleteProductUsecase(
+      final result = await deleteProductUsecase(
           delete_usecase.Params(productId: event.id));
       result.fold(
         (failure) {
@@ -68,7 +68,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     on<LoadAllProductEvent>((event, emit) async {
       emit(LoadingState());
-      final result = await _viewAllProductsUsecase(NoParams());
+      final result = await viewAllProductsUsecase(NoParams());
       result.fold(
         (failure) {
           emit(ErrorState(failure.message));
@@ -80,7 +80,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     });
     on<UpdateProductEvent>((event, emit) async {
       emit(LoadingState());
-      final result = await _updateProductUsecase(
+      final result = await updateProductUsecase(
           update_usecase.Params(product: event.product));
       result.fold(
         (failure) {
