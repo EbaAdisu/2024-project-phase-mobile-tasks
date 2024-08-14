@@ -47,7 +47,7 @@ void setUpLocator() {
       () => ProductLocalDataSourceImpl(sharedPreferences: locator()));
 
   // core
-  locator.registerLazySingleton(() => NetworkInfoImpl(locator()));
+  locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
 
   // external
   locator.registerLazySingleton(() => http.Client());
