@@ -2,6 +2,7 @@ import 'package:ecommerce_app/core/platform/network_info.dart';
 import 'package:ecommerce_app/data/data_sources/local_data_source.dart';
 import 'package:ecommerce_app/data/data_sources/remote_data_source.dart';
 import 'package:ecommerce_app/domain/repositories/product_repository.dart';
+import 'package:ecommerce_app/domain/usecases/view_specific_product.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mockito/annotations.dart';
@@ -14,7 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart';
     ProductLocalDataSource,
     InternetConnectionChecker,
     SharedPreferences,
-    NetworkInfo
+    NetworkInfo,
+    ViewProductUsecase
   ],
   customMocks: [
     MockSpec<http.Client>(as: #MockHttpClient),

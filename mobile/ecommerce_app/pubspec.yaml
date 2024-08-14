@@ -44,6 +44,8 @@ dependencies:
   shared_preferences: ^2.3.1
   build_runner: ^2.4.11
   internet_connection_checker: ^1.0.0+1
+  bloc_test: ^9.1.7
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:
