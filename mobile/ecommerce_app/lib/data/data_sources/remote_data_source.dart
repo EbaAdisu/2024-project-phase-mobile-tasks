@@ -19,14 +19,37 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   ProductRemoteDataSourceImpl({required this.client});
 
+  // @override
+  // Future<ProductModel> createProduct(ProductModel product) async {
+  //   final response = await client.post(
+  //     Uri.parse(Urls.product()),
+  //     body: product.toJson(),
+  //   );
+  //   if (response.statusCode == 201) {
+  //     return ProductModel.fromJson(json.decode(response.body)['data']);
+  //   } else {
+  //     throw ServerException();
+  //   }
+  // }
+
   @override
   Future<ProductModel> createProduct(ProductModel product) async {
-    final response = await client.post(
-      Uri.parse(Urls.product()),
-      body: product.toJson(),
-    );
+    var request = http.MultipartRequest('POST', Uri.parse(Urls.product()));
+
+    request.fields['id'] = product.id;
+    request.fields['name'] = product.name;
+    request.fields['description'] = product.description;
+    request.fields['price'] = product.price.toString();
+    request.fields['imageUrl'] = product.imageUrl;
+
+    request.files
+        .add(await http.MultipartFile.fromPath('image', product.imageUrl));
+
+    var response = await request.send();
+
     if (response.statusCode == 201) {
-      return ProductModel.fromJson(json.decode(response.body)['data']);
+      var responseData = await response.stream.bytesToString();
+      return ProductModel.fromJson(json.decode(responseData)['data']);
     } else {
       throw ServerException();
     }
@@ -69,7 +92,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
-    final response = await client.patch(
+    final response = await client.put(
       Uri.parse(
         Urls.productId(product.id),
       ),
@@ -104,30 +127,6 @@ class ImageTempRemoteDataSourceImpl {
     var response = await request.send();
 
     if (response.statusCode == 201) {
-      var responseData = await response.stream.bytesToString();
-      return ProductModel.fromJson(json.decode(responseData));
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<ProductModel> updateProduct(ProductModel product) async {
-    var request =
-        http.MultipartRequest('PUT', Uri.parse(Urls.product() + product.id));
-
-    request.fields['id'] = product.id;
-    request.fields['name'] = product.name;
-    request.fields['description'] = product.description;
-    request.fields['price'] = product.price.toString();
-    request.fields['imageUrl'] = product.imageUrl;
-
-    request.files
-        .add(await http.MultipartFile.fromPath('image', product.imageUrl));
-
-    var response = await request.send();
-
-    if (response.statusCode == 200) {
       var responseData = await response.stream.bytesToString();
       return ProductModel.fromJson(json.decode(responseData));
     } else {
