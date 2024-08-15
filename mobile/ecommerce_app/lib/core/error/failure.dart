@@ -23,3 +23,7 @@ class DatabaseFailure extends Failure {
 class CacheFailure extends Failure {
   const CacheFailure(super.message);
 }
+
+class ImageUploadFailure extends Failure {
+  const ImageUploadFailure(super.message);
+}

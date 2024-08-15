@@ -69,8 +69,10 @@ void main() {
       },
       act: (bloc) => bloc.add(const CreateProductEvent(productEntity)),
       // wait: const Duration(milliseconds: 300),
-      expect: () =>
-          [LoadingState(), const LoadedSingleProductState(productEntity)],
+      expect: () => [
+        LoadingState(),
+        const LoadedSingleProductState(productEntity),
+      ],
     );
 
     blocTest<ProductBloc, ProductState>(

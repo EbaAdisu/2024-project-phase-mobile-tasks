@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/platform/network_info.dart';
@@ -16,8 +17,37 @@ import 'presentation/bloc/product_bloc.dart';
 
 final locator = GetIt.instance;
 
-void setUpLocator() {
-  //bloc
+Future<void> setUpLocator() async {
+  // External dependencies
+  locator.registerLazySingleton(() => http.Client());
+  final shared = await SharedPreferences.getInstance();
+  locator.registerLazySingleton<SharedPreferences>(() => shared);
+  locator.registerLazySingleton(() => InternetConnectionChecker());
+
+  // Core
+  locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
+
+  // Data sources
+  locator.registerLazySingleton<ProductRemoteDataSource>(
+      () => ProductRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<ProductLocalDataSource>(
+      () => ProductLocalDataSourceImpl(sharedPreferences: locator()));
+
+  // Repository
+  locator.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(
+        networkInfo: locator(),
+        productRemoteDataSource: locator(),
+        productLocalDataSource: locator(),
+      ));
+
+  // Use cases
+  locator.registerLazySingleton(() => CreateProductUsecase(locator()));
+  locator.registerLazySingleton(() => DeleteProductUsecase(locator()));
+  locator.registerLazySingleton(() => ViewProductUsecase(locator()));
+  locator.registerLazySingleton(() => ViewAllProductsUsecase(locator()));
+  locator.registerLazySingleton(() => UpdateProductUsecase(locator()));
+
+  // Bloc
   locator.registerFactory(() => ProductBloc(
         createProductUsecase: locator(),
         deleteProductUsecase: locator(),
@@ -25,34 +55,4 @@ void setUpLocator() {
         viewAllProductsUsecase: locator(),
         updateProductUsecase: locator(),
       ));
-  // uscases
-  locator.registerLazySingleton(() => CreateProductUsecase(locator()));
-  locator.registerLazySingleton(() => DeleteProductUsecase(locator()));
-  locator.registerLazySingleton(() => ViewProductUsecase(locator()));
-  locator.registerLazySingleton(() => ViewAllProductsUsecase(locator()));
-  locator.registerLazySingleton(() => UpdateProductUsecase(locator()));
-
-  // repository
-  locator.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(
-        networkInfo: locator(),
-        productRemoteDataSource: locator(),
-        productLocalDataSource: locator(),
-      ));
-
-  // data sources
-  locator.registerLazySingleton<ProductRemoteDataSource>(
-      () => ProductRemoteDataSourceImpl(client: locator()));
-
-  locator.registerLazySingleton<ProductLocalDataSource>(
-      () => ProductLocalDataSourceImpl(sharedPreferences: locator()));
-
-  // core
-  locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
-
-  // external
-  locator.registerLazySingleton(() => http.Client());
-
-  // locator.registerLazySingleton(() => SharedPreferences.getInstance());
-  locator.registerLazySingletonAsync<SharedPreferences>(
-      () async => await SharedPreferences.getInstance());
 }

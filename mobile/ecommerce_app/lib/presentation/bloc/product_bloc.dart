@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -42,6 +43,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(LoadingState());
         final result = await createProductUsecase(
             create_usecase.Params(product: event.product));
+        debugPrint('CreateProductEvent $result');
         result.fold(
           (failure) {
             emit(ErrorState(failure.message));
@@ -53,9 +55,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       },
     );
     on<DeleteProductEvent>((event, emit) async {
+      debugPrint('DeleteProductEvent');
       emit(LoadingState());
       final result = await deleteProductUsecase(
           delete_usecase.Params(productId: event.id));
+
+      debugPrint('DeleteProductEvent $result');
       result.fold(
         (failure) {
           emit(ErrorState(failure.message));
@@ -68,20 +73,24 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     on<LoadAllProductEvent>((event, emit) async {
       emit(LoadingState());
+      // debugPrint('LoadAllProductEvent');
       final result = await viewAllProductsUsecase(NoParams());
       result.fold(
         (failure) {
           emit(ErrorState(failure.message));
         },
         (products) {
+          // debugPrint('LoadAllProductState $products');
           emit(LoadedAllProductState(products));
         },
       );
     });
     on<UpdateProductEvent>((event, emit) async {
       emit(LoadingState());
+      debugPrint('UpdateProductEvent');
       final result = await updateProductUsecase(
           update_usecase.Params(product: event.product));
+      debugPrint('UpdateProductEvent $result');
       result.fold(
         (failure) {
           emit(ErrorState(failure.message));

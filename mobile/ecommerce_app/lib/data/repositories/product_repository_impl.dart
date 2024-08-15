@@ -36,6 +36,8 @@ class ProductRepositoryImpl extends ProductRepository {
         return const Left(ServerFailure('Server Failure'));
       } on SocketException {
         return const Left(ConnectionFailure('Connection Failure'));
+      } on ImageUploadException {
+        return const Left(ImageUploadFailure('Image Upload Failure'));
       }
     } else {
       return const Left(ConnectionFailure('Connection Failure'));
