@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ecommerce_app/core/constants/constants.dart';
 import 'package:ecommerce_app/core/error/exception.dart';
 import 'package:ecommerce_app/data/data_sources/remote_data_source.dart';
@@ -20,7 +22,7 @@ void main() {
 
   group('delete product', () {
     const productId = '1';
-    test('should return void when the response code is 204', () async {
+    test('should return void when the response code is 200', () async {
       // arrange
       when(
         mockHttpClient.delete(
@@ -29,7 +31,7 @@ void main() {
       ).thenAnswer(
         (_) async => http.Response(
           '',
-          204,
+          200,
         ),
       );
       // act
@@ -151,7 +153,8 @@ void main() {
       when(
         mockHttpClient.put(
           Uri.parse(Urls.productId(testProduct.id)),
-          body: testProduct.toJson(),
+          body: jsonEncode(testProduct.toJson()),
+          headers: {'Content-Type': 'application/json'},
         ),
       ).thenAnswer(
         (_) async => http.Response(
@@ -173,7 +176,8 @@ void main() {
         when(
           mockHttpClient.put(
             Uri.parse(Urls.productId(testProduct.id)),
-            body: testProduct.toJson(),
+            body: jsonEncode(testProduct.toJson()),
+            headers: {'Content-Type': 'application/json'},
           ),
         ).thenAnswer(
           (_) async => http.Response(
