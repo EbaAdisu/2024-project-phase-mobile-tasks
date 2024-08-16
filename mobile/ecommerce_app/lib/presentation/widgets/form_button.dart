@@ -7,13 +7,13 @@ import '../bloc/product_event.dart';
 import '../bloc/product_state.dart';
 
 class FormButton extends StatelessWidget {
-  TextEditingController? nameController; // = TextEditingController();
-  TextEditingController? priceController;
-  TextEditingController? descriptionController;
-  TextEditingController? imageUrlController;
-  ProductModel? product;
-  dynamic formKey;
-  FormButton({
+  final TextEditingController? nameController; // = TextEditingController();
+  final TextEditingController? priceController;
+  final TextEditingController? descriptionController;
+  final TextEditingController? imageUrlController;
+  final ProductModel? product;
+  final dynamic formKey;
+  const FormButton({
     super.key,
     required this.text,
     this.nameController,
@@ -58,6 +58,8 @@ class FormButton extends StatelessWidget {
             BlocProvider.of<ProductBloc>(context).stream.listen((state) {
               if (state is LoadedSingleProductState) {
                 debugPrint('Product: Update success');
+                BlocProvider.of<ProductBloc>(context)
+                    .add(const LoadAllProductEvent());
                 Navigator.pushNamed(context, '/');
               } else {
                 debugPrint('Error: $state');
@@ -82,6 +84,9 @@ class FormButton extends StatelessWidget {
               BlocProvider.of<ProductBloc>(context).stream.listen((state) {
                 if (state is LoadedSingleProductState) {
                   debugPrint('Product: Add success');
+                  // add Load all products here and navigate to home
+                  BlocProvider.of<ProductBloc>(context)
+                      .add(const LoadAllProductEvent());
                   Navigator.pushNamed(context, '/');
                 } else {
                   debugPrint('Error: $state');

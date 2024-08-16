@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class FormTextField extends StatelessWidget {
-  TextEditingController controller = TextEditingController();
-  FormTextField({
+  final TextEditingController? controller;
+  final String text;
+  const FormTextField({
     super.key,
     required this.text,
     required this.controller,
   });
 
-  final String text;
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -7,8 +7,8 @@ import '../bloc/product_event.dart';
 import '../bloc/product_state.dart';
 
 class ProductActionButton extends StatelessWidget {
-  ProductModel? product;
-  ProductActionButton({
+  final ProductModel? product;
+  const ProductActionButton({
     super.key,
     this.action,
     this.product,
@@ -28,6 +28,8 @@ class ProductActionButton extends StatelessWidget {
           BlocProvider.of<ProductBloc>(context).stream.listen((state) {
             if (state is InitialState) {
               debugPrint('Product: delete success');
+              BlocProvider.of<ProductBloc>(context)
+                  .add(const LoadAllProductEvent());
               Navigator.pop(context);
             } else {
               debugPrint('Error: $state');
