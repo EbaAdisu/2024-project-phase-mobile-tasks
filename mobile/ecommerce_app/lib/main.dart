@@ -5,6 +5,9 @@ import 'injection_container.dart';
 import 'presentation/bloc/product_bloc.dart';
 import 'presentation/bloc/product_event.dart';
 import 'presentation/pages/add_page.dart';
+import 'presentation/pages/auth/sign_in_page.dart';
+import 'presentation/pages/auth/sign_up_page.dart';
+import 'presentation/pages/auth/splash_page.dart';
 import 'presentation/pages/detail_page.dart';
 import 'presentation/pages/home_page.dart';
 import 'presentation/pages/update_page.dart';
@@ -24,27 +27,36 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<ProductBloc>(
           create: (context) =>
-              locator<ProductBloc>()..add(LoadAllProductEvent()),
+              locator<ProductBloc>()..add(const LoadAllProductEvent()),
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Ecommerce App',
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           WidgetBuilder builder;
           // Match your route names here
           switch (settings.name) {
             case '/':
-              builder = (BuildContext _) => const HomePage();
+              builder = (BuildContext _) => const SplashPage();
               break;
             case '/detail':
-              builder = (BuildContext _) => DetailPage();
+              builder = (BuildContext _) => const DetailPage();
               break;
             case '/add':
               builder = (BuildContext _) => AddPage();
               break;
             case '/update':
               builder = (BuildContext _) => UpdatePage();
+              break;
+            case '/home':
+              builder = (BuildContext _) => const HomePage();
+              break;
+            case '/sign_in':
+              builder = (BuildContext _) => SignInPage();
+              break;
+            case '/sign_up':
+              builder = (BuildContext _) => SignUpPage();
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');

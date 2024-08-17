@@ -99,8 +99,10 @@ class FormButton extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           side: BorderSide(
-              color: text == 'CANCEL' ? Colors.red : Colors.blue, width: 2),
-          backgroundColor: text == 'CANCEL' ? Colors.white : Colors.blue,
+              color: text == 'CANCEL' ? Colors.red : Colors.blue.shade700,
+              width: 2),
+          backgroundColor:
+              text == 'CANCEL' ? Colors.white : Colors.blue.shade700,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
