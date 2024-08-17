@@ -22,25 +22,10 @@ class SignInPage extends StatelessWidget {
           padding: EdgeInsets.all(width * 0.12),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: width * 0.3,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.blue, // Border color
-                    width: 3, // Border width
-                  ),
-                  borderRadius: BorderRadius.circular(31), // Curvy edges
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5), // Shadow color
-                      spreadRadius: 5, // Shadow spread radius
-                      blurRadius: 7, // Shadow blur radius
-                      offset: Offset(0, 3), // Shadow position
-                    ),
-                  ],
-                ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  // borderRadius: BorderRadius.circular(0),
                   child: Image.asset(
                     'images/logo2.jpg',
                     fit: BoxFit.cover, // Make the image cover the entire box
@@ -48,7 +33,7 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 70,
               ),
 
               const Align(
@@ -86,10 +71,10 @@ class SignInPage extends StatelessWidget {
                 // remove the space between the children
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Don't have an account? ",
+                  Text("Don't have an account?",
                       style: TextStyle(
                         color: Colors.grey.shade500,
-                        fontSize: 16,
+                        fontSize: 18,
                         decoration: TextDecoration.none,
                         fontWeight: FontWeight.w500,
                         // add spacing
@@ -100,7 +85,7 @@ class SignInPage extends StatelessWidget {
                       'SIGN UP',
                       style: TextStyle(
                         color: Colors.blue,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                     ),
                     onPressed: () {
