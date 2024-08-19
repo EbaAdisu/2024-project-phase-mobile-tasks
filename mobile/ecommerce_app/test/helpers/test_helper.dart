@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/product/core/platform/network_info.dart';
+import 'package:ecommerce_app/core/platform/network_info.dart';
 import 'package:ecommerce_app/features/product/data/data_sources/local_data_source.dart';
 import 'package:ecommerce_app/features/product/data/data_sources/remote_data_source.dart';
 import 'package:ecommerce_app/features/product/domain/repositories/product_repository.dart';

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'features/product/core/platform/network_info.dart';
+import 'core/platform/network_info.dart';
 import 'features/product/data/data_sources/local_data_source.dart';
 import 'features/product/data/data_sources/remote_data_source.dart';
 import 'features/product/data/repositories/product_repository_impl.dart';

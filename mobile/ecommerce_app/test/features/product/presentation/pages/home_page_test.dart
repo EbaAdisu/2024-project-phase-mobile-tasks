@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ecommerce_app/features/product/core/constants/constants.dart';
+import 'package:ecommerce_app/core/constants/constants.dart';
 import 'package:ecommerce_app/features/product/data/models/product_model.dart';
 import 'package:ecommerce_app/features/product/presentation/bloc/product_bloc.dart';
 import 'package:ecommerce_app/features/product/presentation/bloc/product_event.dart';

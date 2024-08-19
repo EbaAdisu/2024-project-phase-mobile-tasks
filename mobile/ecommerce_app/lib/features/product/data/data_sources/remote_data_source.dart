@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../../core/constants/constants.dart';
-import '../../core/error/exception.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/error/exception.dart';
 import '../models/product_model.dart';
 
 abstract class ProductRemoteDataSource {

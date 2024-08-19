@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../core/usecase/usecase.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../../domain/usecases/create_product.dart' as create_usecase;
 import '../../domain/usecases/delete_product.dart' as delete_usecase;
 import '../../domain/usecases/update_product.dart' as update_usecase;

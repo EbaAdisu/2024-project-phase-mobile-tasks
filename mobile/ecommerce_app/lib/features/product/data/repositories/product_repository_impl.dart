@@ -4,9 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
 // import '../../core/error/exception.dart';
-import '../../core/error/exception.dart';
-import '../../core/error/failure.dart';
-import '../../core/platform/network_info.dart';
+import '../../../../core/error/exception.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/product_entity.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../data_sources/local_data_source.dart';

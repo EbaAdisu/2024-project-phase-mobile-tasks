@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/form_button.dart';
-import '../../widgets/form_text_field.dart';
+import '../../../product/presentation/widgets/form_button.dart';
+import '../../../product/presentation/widgets/form_text_field.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});

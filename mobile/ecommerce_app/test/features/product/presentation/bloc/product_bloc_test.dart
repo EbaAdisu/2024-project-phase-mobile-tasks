@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/features/product/core/error/failure.dart';
-import 'package:ecommerce_app/features/product/core/usecase/usecase.dart';
+import 'package:ecommerce_app/core/error/failure.dart';
+import 'package:ecommerce_app/core/usecase/usecase.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/features/product/domain/usecases/create_product.dart'
     as create_usecase;

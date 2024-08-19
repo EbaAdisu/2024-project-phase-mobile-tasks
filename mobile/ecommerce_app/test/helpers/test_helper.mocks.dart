@@ -8,11 +8,9 @@ import 'dart:convert' as _i20;
 import 'dart:typed_data' as _i22;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:ecommerce_app/features/product/core/error/failure.dart' as _i8;
-import 'package:ecommerce_app/features/product/core/platform/network_info.dart'
-    as _i13;
-import 'package:ecommerce_app/features/product/core/usecase/usecase.dart'
-    as _i18;
+import 'package:ecommerce_app/core/error/failure.dart' as _i8;
+import 'package:ecommerce_app/core/platform/network_info.dart' as _i13;
+import 'package:ecommerce_app/core/usecase/usecase.dart' as _i18;
 import 'package:ecommerce_app/features/product/data/data_sources/local_data_source.dart'
     as _i11;
 import 'package:ecommerce_app/features/product/data/data_sources/remote_data_source.dart'
