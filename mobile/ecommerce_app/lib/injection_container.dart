@@ -3,17 +3,17 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/platform/network_info.dart';
-import 'data/data_sources/local_data_source.dart';
-import 'data/data_sources/remote_data_source.dart';
-import 'data/repositories/product_repository_impl.dart';
-import 'domain/repositories/product_repository.dart';
-import 'domain/usecases/create_product.dart';
-import 'domain/usecases/delete_product.dart';
-import 'domain/usecases/update_product.dart';
-import 'domain/usecases/view_all_product.dart';
-import 'domain/usecases/view_specific_product.dart';
-import 'presentation/bloc/product_bloc.dart';
+import 'features/product/core/platform/network_info.dart';
+import 'features/product/data/data_sources/local_data_source.dart';
+import 'features/product/data/data_sources/remote_data_source.dart';
+import 'features/product/data/repositories/product_repository_impl.dart';
+import 'features/product/domain/repositories/product_repository.dart';
+import 'features/product/domain/usecases/create_product.dart';
+import 'features/product/domain/usecases/delete_product.dart';
+import 'features/product/domain/usecases/update_product.dart';
+import 'features/product/domain/usecases/view_all_product.dart';
+import 'features/product/domain/usecases/view_specific_product.dart';
+import 'features/product/presentation/bloc/product_bloc.dart';
 
 final locator = GetIt.instance;
 

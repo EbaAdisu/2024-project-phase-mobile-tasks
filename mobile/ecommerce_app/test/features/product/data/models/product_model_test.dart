@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:ecommerce_app/data/models/product_model.dart';
-import 'package:ecommerce_app/domain/entities/product_entity.dart';
+import 'package:ecommerce_app/features/product/data/models/product_model.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../helpers/json_reader.dart';
+import '../../../../helpers/json_reader.dart';
 
 void main() {
   const testProductModel = ProductModel(

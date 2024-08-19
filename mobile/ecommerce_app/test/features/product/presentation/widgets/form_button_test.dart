@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ecommerce_app/data/models/product_model.dart';
-import 'package:ecommerce_app/presentation/bloc/product_bloc.dart';
-import 'package:ecommerce_app/presentation/bloc/product_event.dart';
-import 'package:ecommerce_app/presentation/bloc/product_state.dart';
-import 'package:ecommerce_app/presentation/widgets/form_button.dart';
+import 'package:ecommerce_app/features/product/data/models/product_model.dart';
+import 'package:ecommerce_app/features/product/presentation/bloc/product_bloc.dart';
+import 'package:ecommerce_app/features/product/presentation/bloc/product_event.dart';
+import 'package:ecommerce_app/features/product/presentation/bloc/product_state.dart';
+import 'package:ecommerce_app/features/product/presentation/widgets/form_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

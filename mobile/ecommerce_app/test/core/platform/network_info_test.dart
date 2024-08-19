@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/core/platform/network_info.dart';
+import 'package:ecommerce_app/features/product/core/platform/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

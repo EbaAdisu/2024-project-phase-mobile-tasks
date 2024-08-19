@@ -1,13 +1,11 @@
 import 'dart:io';
 
-import 'package:ecommerce_app/data/models/product_model.dart';
-import 'package:ecommerce_app/presentation/pages/update_page.dart';
-import 'package:ecommerce_app/presentation/widgets/form_button.dart';
-import 'package:ecommerce_app/presentation/widgets/form_text_field.dart';
+import 'package:ecommerce_app/features/product/data/models/product_model.dart';
+import 'package:ecommerce_app/features/product/presentation/pages/update_page.dart';
+import 'package:ecommerce_app/features/product/presentation/widgets/form_button.dart';
+import 'package:ecommerce_app/features/product/presentation/widgets/form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-// Define a real ProductModel for testing
 
 void main() {
   setUp(() {

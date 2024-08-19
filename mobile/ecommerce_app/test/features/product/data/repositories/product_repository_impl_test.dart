@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/core/error/exception.dart';
-import 'package:ecommerce_app/core/error/failure.dart';
-import 'package:ecommerce_app/data/models/product_model.dart';
-import 'package:ecommerce_app/data/repositories/product_repository_impl.dart';
+import 'package:ecommerce_app/features/product/core/error/exception.dart';
+import 'package:ecommerce_app/features/product/core/error/failure.dart';
+import 'package:ecommerce_app/features/product/data/models/product_model.dart';
+import 'package:ecommerce_app/features/product/data/repositories/product_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockProductRemoteDataSource mockProductRemoteDataSource;

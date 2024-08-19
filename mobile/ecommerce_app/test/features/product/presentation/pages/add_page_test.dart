@@ -2,13 +2,12 @@
 
 import 'dart:io';
 
-import 'package:ecommerce_app/presentation/pages/add_page%20copy.dart';
-import 'package:ecommerce_app/presentation/widgets/form_text_field.dart';
+import 'package:ecommerce_app/features/product/presentation/pages/add_page%20copy.dart';
+import 'package:ecommerce_app/features/product/presentation/widgets/form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:path_provider/path_provider.dart';
 
 class MockImagePicker extends Mock implements ImagePicker {}
 
@@ -17,18 +16,8 @@ class MockXFile extends Mock implements XFile {}
 class MockDirectory extends Mock implements Directory {}
 
 void main() {
-  late MockImagePicker mockImagePicker;
-  late MockXFile mockXFile;
-  late MockDirectory mockDirectory;
-
   setUpAll(() {
     registerFallbackValue(MockXFile());
-  });
-
-  setUp(() {
-    mockImagePicker = MockImagePicker();
-    mockXFile = MockXFile();
-    mockDirectory = MockDirectory();
   });
 
   Future<void> pumpAddPage(WidgetTester tester) async {
@@ -87,42 +76,5 @@ void main() {
 
       // Here you can add expectations or verifications for what should happen when CANCEL is tapped
     });
-
-    ////////////////////////////////////////////////////////////////////
-    // testWidgets('picks and displays image correctly', (tester) async {
-    //   // Arrange
-    //   when(() => mockImagePicker.pickImage(source: ImageSource.gallery))
-    //       .thenAnswer((_) async => mockXFile);
-    //   when(() => mockXFile.path).thenReturn('images/joker.jpg');
-    //   when(() => mockXFile.name).thenReturn('joker.jpg');
-    //   when(() => getApplicationDocumentsDirectory())
-    //       .thenAnswer((_) async => mockDirectory);
-    //   when(() => mockDirectory.path).thenReturn('/images');
-
-    //   // Act
-    //   await tester.pumpWidget(
-    //     MaterialApp(
-    //       home: AddPage(),
-    //     ),
-    //   );
-    //   await tester.pumpAndSettle();
-
-    //   // Tap on the image picker container
-    //   await tester.tap(find.byType(GestureDetector));
-    //   await tester.pumpAndSettle();
-
-    //   // Assert
-    //   // Verify that the image picker was called
-    //   verify(() => mockImagePicker.pickImage(source: ImageSource.gallery))
-    //       .called(1);
-
-    //   // Since we're not actually loading images in tests, we can check for the presence of a DecorationImage
-    //   final container = tester.widget<Container>(find.byWidgetPredicate(
-    //       (widget) =>
-    //           widget is Container &&
-    //           widget.decoration is BoxDecoration &&
-    //           (widget.decoration as BoxDecoration).image != null));
-    //   expect(container, isNotNull);
-    // });
   });
 }

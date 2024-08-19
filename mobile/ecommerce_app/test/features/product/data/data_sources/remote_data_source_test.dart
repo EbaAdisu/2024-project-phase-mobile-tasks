@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:ecommerce_app/core/constants/constants.dart';
-import 'package:ecommerce_app/core/error/exception.dart';
-import 'package:ecommerce_app/data/data_sources/remote_data_source.dart';
-import 'package:ecommerce_app/data/models/product_model.dart';
+import 'package:ecommerce_app/features/product/core/constants/constants.dart';
+import 'package:ecommerce_app/features/product/core/error/exception.dart';
+import 'package:ecommerce_app/features/product/data/data_sources/remote_data_source.dart';
+import 'package:ecommerce_app/features/product/data/models/product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/json_reader.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/json_reader.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockHttpClient mockHttpClient;

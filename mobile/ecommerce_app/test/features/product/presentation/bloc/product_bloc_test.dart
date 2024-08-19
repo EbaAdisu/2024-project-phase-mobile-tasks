@@ -1,23 +1,23 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/core/error/failure.dart';
-import 'package:ecommerce_app/core/usecase/usecase.dart';
-import 'package:ecommerce_app/domain/entities/product_entity.dart';
-import 'package:ecommerce_app/domain/usecases/create_product.dart'
+import 'package:ecommerce_app/features/product/core/error/failure.dart';
+import 'package:ecommerce_app/features/product/core/usecase/usecase.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product_entity.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/create_product.dart'
     as create_usecase;
-import 'package:ecommerce_app/domain/usecases/delete_product.dart'
+import 'package:ecommerce_app/features/product/domain/usecases/delete_product.dart'
     as delete_usecase;
-import 'package:ecommerce_app/domain/usecases/update_product.dart'
+import 'package:ecommerce_app/features/product/domain/usecases/update_product.dart'
     as update_usecase;
-import 'package:ecommerce_app/domain/usecases/view_specific_product.dart'
+import 'package:ecommerce_app/features/product/domain/usecases/view_specific_product.dart'
     as view_usecase;
-import 'package:ecommerce_app/presentation/bloc/product_bloc.dart';
-import 'package:ecommerce_app/presentation/bloc/product_event.dart';
-import 'package:ecommerce_app/presentation/bloc/product_state.dart';
+import 'package:ecommerce_app/features/product/presentation/bloc/product_bloc.dart';
+import 'package:ecommerce_app/features/product/presentation/bloc/product_event.dart';
+import 'package:ecommerce_app/features/product/presentation/bloc/product_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockCreateProductUsecase mockCreateProductUsecase;

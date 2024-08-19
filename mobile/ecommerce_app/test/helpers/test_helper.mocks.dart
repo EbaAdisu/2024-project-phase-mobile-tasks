@@ -8,21 +8,30 @@ import 'dart:convert' as _i20;
 import 'dart:typed_data' as _i22;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:ecommerce_app/core/error/failure.dart' as _i8;
-import 'package:ecommerce_app/core/platform/network_info.dart' as _i13;
-import 'package:ecommerce_app/core/usecase/usecase.dart' as _i18;
-import 'package:ecommerce_app/data/data_sources/local_data_source.dart' as _i11;
-import 'package:ecommerce_app/data/data_sources/remote_data_source.dart'
+import 'package:ecommerce_app/features/product/core/error/failure.dart' as _i8;
+import 'package:ecommerce_app/features/product/core/platform/network_info.dart'
+    as _i13;
+import 'package:ecommerce_app/features/product/core/usecase/usecase.dart'
+    as _i18;
+import 'package:ecommerce_app/features/product/data/data_sources/local_data_source.dart'
+    as _i11;
+import 'package:ecommerce_app/features/product/data/data_sources/remote_data_source.dart'
     as _i10;
-import 'package:ecommerce_app/data/models/product_model.dart' as _i3;
-import 'package:ecommerce_app/domain/entities/product_entity.dart' as _i9;
-import 'package:ecommerce_app/domain/repositories/product_repository.dart'
+import 'package:ecommerce_app/features/product/data/models/product_model.dart'
+    as _i3;
+import 'package:ecommerce_app/features/product/domain/entities/product_entity.dart'
+    as _i9;
+import 'package:ecommerce_app/features/product/domain/repositories/product_repository.dart'
     as _i5;
-import 'package:ecommerce_app/domain/usecases/create_product.dart' as _i15;
-import 'package:ecommerce_app/domain/usecases/delete_product.dart' as _i19;
-import 'package:ecommerce_app/domain/usecases/update_product.dart' as _i16;
-import 'package:ecommerce_app/domain/usecases/view_all_product.dart' as _i17;
-import 'package:ecommerce_app/domain/usecases/view_specific_product.dart'
+import 'package:ecommerce_app/features/product/domain/usecases/create_product.dart'
+    as _i15;
+import 'package:ecommerce_app/features/product/domain/usecases/delete_product.dart'
+    as _i19;
+import 'package:ecommerce_app/features/product/domain/usecases/update_product.dart'
+    as _i16;
+import 'package:ecommerce_app/features/product/domain/usecases/view_all_product.dart'
+    as _i17;
+import 'package:ecommerce_app/features/product/domain/usecases/view_specific_product.dart'
     as _i14;
 import 'package:http/http.dart' as _i6;
 import 'package:internet_connection_checker/internet_connection_checker.dart'

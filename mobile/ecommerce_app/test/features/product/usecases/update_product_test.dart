@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/core/error/failure.dart';
-import 'package:ecommerce_app/domain/entities/product_entity.dart';
-import 'package:ecommerce_app/domain/usecases/create_product.dart';
+import 'package:ecommerce_app/features/product/core/error/failure.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product_entity.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/update_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late CreateProductUsecase createProductUsecase;
+  late UpdateProductUsecase updateProductUsecase;
   late MockProductRepository mockProductRepository;
   setUp(() {
     mockProductRepository = MockProductRepository();
-    createProductUsecase = CreateProductUsecase(mockProductRepository);
+    updateProductUsecase = UpdateProductUsecase(mockProductRepository);
   });
   const testproduct = ProductEntity(
     id: '1',
@@ -21,17 +21,16 @@ void main() {
     description: 'description',
     imageUrl: 'image_url',
   );
-  // const testPoductName = 'product';
   test(
-    'should call createProduct from ProductRepository',
+    'should call updateProduct from ProductRepository',
     () async {
       // arrange
-      when(mockProductRepository.createProduct(testproduct))
+      when(mockProductRepository.updateProduct(testproduct))
           .thenAnswer((_) async => const Right(testproduct));
 
       // act
       final result =
-          await createProductUsecase(const Params(product: testproduct));
+          await updateProductUsecase(const Params(product: testproduct));
 
       // assert
       expect(result, const Right(testproduct));
@@ -41,12 +40,12 @@ void main() {
     'should return failure when product repository return failure',
     () async {
       // arrange
-      when(mockProductRepository.createProduct(testproduct))
+      when(mockProductRepository.updateProduct(testproduct))
           .thenAnswer((_) async => const Left(ServerFailure('error')));
 
       // act
       final result =
-          await createProductUsecase(const Params(product: testproduct));
+          await updateProductUsecase(const Params(product: testproduct));
 
       // assert
       expect(result, const Left(ServerFailure('error')));
