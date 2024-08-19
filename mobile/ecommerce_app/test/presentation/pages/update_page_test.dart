@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:ecommerce_app/data/models/product_model.dart';
 import 'package:ecommerce_app/presentation/pages/detail_page.dart';
+import 'package:ecommerce_app/presentation/pages/update_page.dart';
+import 'package:ecommerce_app/presentation/widgets/form_button.dart';
+import 'package:ecommerce_app/presentation/widgets/form_text_field.dart';
 import 'package:ecommerce_app/presentation/widgets/product_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,12 +15,11 @@ void main() {
   setUp(() {
     HttpOverrides.global = null;
   });
-
-  testWidgets('DetailPage test', (WidgetTester tester) async {
-    const product = ProductModel(
+  testWidgets('UpdatePage test', (WidgetTester tester) async {
+    final product = ProductModel(
       id: '1',
       name: 'Test Product',
-      description: 'This is a test product.',
+      description: 'This is a test product',
       price: 10.0,
       imageUrl: 'http://example.com/image.jpg',
     );
@@ -33,12 +35,12 @@ void main() {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => DetailPage(),
+                        builder: (BuildContext context) => UpdatePage(),
                         settings: RouteSettings(arguments: product),
                       ),
                     );
                   },
-                  child: const Text('Open DetailPage'),
+                  child: const Text('Open UpdatePage'),
                 ),
               );
             },
@@ -47,19 +49,14 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text('Open DetailPage'));
+    await tester.tap(find.text('Open UpdatePage'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Test Product'), findsOneWidget);
-    expect(find.text('\$10.0'), findsOneWidget);
-    expect(find.text('This is a test product.'), findsOneWidget);
-    expect(find.byType(Image), findsOneWidget);
-
-    // Verify that the back button is present
-    expect(find.byIcon(Icons.arrow_back_ios_new), findsOneWidget);
-
-    // Verify the action buttons
-    expect(find.widgetWithText(ProductActionButton, 'DELETE'), findsOneWidget);
-    expect(find.widgetWithText(ProductActionButton, 'UPDATE'), findsOneWidget);
+    expect(find.text('Update Product'), findsOneWidget);
+    expect(find.widgetWithText(FormTextField, 'name'), findsOneWidget);
+    expect(find.widgetWithText(FormTextField, 'price'), findsOneWidget);
+    expect(find.widgetWithText(FormTextField, 'description'), findsOneWidget);
+    expect(find.widgetWithText(FormButton, 'UPDATE'), findsOneWidget);
+    expect(find.widgetWithText(FormButton, 'CANCEL'), findsOneWidget);
   });
 }
