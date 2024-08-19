@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:ecommerce_app/data/models/product_model.dart';
-import 'package:ecommerce_app/presentation/pages/detail_page.dart';
 import 'package:ecommerce_app/presentation/pages/update_page.dart';
 import 'package:ecommerce_app/presentation/widgets/form_button.dart';
 import 'package:ecommerce_app/presentation/widgets/form_text_field.dart';
-import 'package:ecommerce_app/presentation/widgets/product_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
