@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-import 'package:ecommerce_app/core/constants/constants.dart';
 import 'package:ecommerce_app/core/error/exception.dart';
+import 'package:ecommerce_app/core/platform/client.dart';
 import 'package:ecommerce_app/features/product/data/data_sources/remote_data_source.dart';
 import 'package:ecommerce_app/features/product/data/models/product_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MockHttpClient mockHttpClient;
+  late MockClient mockHttpClient;
   late ProductRemoteDataSourceImpl productRemoteDataSourceImpl;
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     productRemoteDataSourceImpl =
         ProductRemoteDataSourceImpl(client: mockHttpClient);
   });
@@ -25,21 +25,21 @@ void main() {
     test('should return void when the response code is 200', () async {
       // arrange
       when(
-        mockHttpClient.delete(
-          Uri.parse(Urls.productId(productId)),
+        mockHttpClient.deleteProduct(
+          productId,
         ),
       ).thenAnswer(
-        (_) async => http.Response(
-          '',
-          200,
+        (_) async => HttpResponse(
+          statusCode: 200,
+          body: null,
         ),
       );
       // act
       await productRemoteDataSourceImpl.deleteProduct(productId);
       // assert
       verify(
-        mockHttpClient.delete(
-          Uri.parse(Urls.productId(productId)),
+        mockHttpClient.deleteProduct(
+          productId,
         ),
       );
     });
@@ -49,15 +49,9 @@ void main() {
       () async {
         // arrange
         when(
-          mockHttpClient.delete(
-            Uri.parse(Urls.productId(productId)),
-          ),
+          mockHttpClient.deleteProduct(productId),
         ).thenAnswer(
-          (_) async => http.Response(
-            'Something went wrong',
-            404,
-          ),
-        );
+            (_) async => Future<HttpResponse>.error(ServerException()));
         // act
         final result = productRemoteDataSourceImpl.deleteProduct(productId);
         // assert
@@ -70,11 +64,15 @@ void main() {
     test('should return product model when the response code is 200', () async {
       // arrange
       when(
-        mockHttpClient.get(Uri.parse(Urls.productId(productId))),
+        mockHttpClient.getProduct(productId),
       ).thenAnswer(
-        (_) async => http.Response(
-          readJson('dummy_product_response.json'),
-          200,
+        (_) async => HttpResponse(
+          statusCode: 200,
+          body: ProductModel.fromJson(
+            json.decode(
+              readJson('dummy_product_response.json'),
+            )['data'],
+          ),
         ),
       );
       // act
@@ -88,12 +86,9 @@ void main() {
         () async {
       // arrange
       when(
-        mockHttpClient.get(Uri.parse(Urls.productId(productId))),
+        mockHttpClient.getProduct(productId),
       ).thenAnswer(
-        (_) async => http.Response(
-          'Something went wrong',
-          404,
-        ),
+        (_) async => Future<HttpResponse>.error(ServerException()),
       );
       // act
       final result = productRemoteDataSourceImpl.getProduct(productId);
@@ -102,21 +97,26 @@ void main() {
     });
   });
   group('get all products', () {
+    List<dynamic> jsonData =
+        json.decode(readJson('dummy_products_response.json'))['data'];
     test('should return list of product model when the response code is 200',
         () async {
       // arrange
       when(
-        mockHttpClient.get(Uri.parse(Urls.product())),
+        mockHttpClient.getProducts(),
       ).thenAnswer(
-        (_) async => http.Response(
-          readJson('dummy_products_response.json'),
-          200,
+        (_) async => HttpResponse(
+          statusCode: 200,
+          body: jsonData
+              .map((jsonItem) => ProductModel.fromJson(jsonItem))
+              .toList(),
         ),
       );
       // act
       final result = await productRemoteDataSourceImpl.getProducts();
       // assert
       // check if the result is a list of ProductModel and not empty
+      debugPrint('Result: $result');
       expect(result, isA<List<ProductModel>>());
       expect(result.isNotEmpty, true);
     });
@@ -126,12 +126,9 @@ void main() {
       () async {
         // arrange
         when(
-          mockHttpClient.get(Uri.parse(Urls.product())),
+          mockHttpClient.getProducts(),
         ).thenAnswer(
-          (_) async => http.Response(
-            'Something went wrong',
-            404,
-          ),
+          (_) async => Future<HttpResponse>.error(ServerException()),
         );
         // act
         final result = productRemoteDataSourceImpl.getProducts();
@@ -151,15 +148,11 @@ void main() {
     test('should return product model when the response code is 200', () async {
       // arrange
       when(
-        mockHttpClient.put(
-          Uri.parse(Urls.productId(testProduct.id)),
-          body: jsonEncode(testProduct.toJson()),
-          headers: {'Content-Type': 'application/json'},
-        ),
+        mockHttpClient.updateProduct(testProduct),
       ).thenAnswer(
-        (_) async => http.Response(
-          readJson('dummy_product_response.json'),
-          200,
+        (_) async => HttpResponse(
+          statusCode: 200,
+          body: testProduct,
         ),
       );
       // act
@@ -174,16 +167,9 @@ void main() {
       () async {
         // arrange
         when(
-          mockHttpClient.put(
-            Uri.parse(Urls.productId(testProduct.id)),
-            body: jsonEncode(testProduct.toJson()),
-            headers: {'Content-Type': 'application/json'},
-          ),
+          mockHttpClient.updateProduct(testProduct),
         ).thenAnswer(
-          (_) async => http.Response(
-            'Something went wrong',
-            404,
-          ),
+          (_) async => Future<HttpResponse>.error(ServerException()),
         );
         // act
         final result = productRemoteDataSourceImpl.updateProduct(testProduct);
