@@ -173,12 +173,12 @@ void main() {
         final ButtonStyle buttonStyle = elevatedButton.style!;
 
         // Check button background color
-        expect(buttonStyle.backgroundColor!.resolve({}), Colors.blue);
+        expect(buttonStyle.backgroundColor!.resolve({}), Colors.blue.shade700);
 
         // Check button border color
         expect(
           (buttonStyle.side!.resolve({}) as BorderSide).color,
-          Colors.blue,
+          Colors.blue.shade700,
         );
 
         // Check text color

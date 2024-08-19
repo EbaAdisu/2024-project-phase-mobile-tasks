@@ -42,55 +42,57 @@ void main() {
       price: 5.33,
     )
   ];
+  group('home page test', () {
+    testWidgets('state should have a loading circle', (widgetTester) async {
+      //arrange
+      when(() => mockProductBloc.state).thenAnswer((_) => LoadingState());
 
-  testWidgets('state should have a loading circle', (widgetTester) async {
-    //arrange
-    when(() => mockProductBloc.state).thenAnswer((_) => LoadingState());
+      //act
+      await widgetTester.pumpWidget(_makeTestableWidget(const HomePage()));
 
-    //act
-    await widgetTester.pumpWidget(_makeTestableWidget(const HomePage()));
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+    testWidgets('Homepage shows error message when state is error',
+        (WidgetTester tester) async {
+      //arrange
+      when(() => mockProductBloc.state)
+          .thenReturn(const ErrorState('Test Error Message'));
 
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
-  testWidgets('Homepage shows error message when state is error',
-      (WidgetTester tester) async {
-    //arrange
-    when(() => mockProductBloc.state)
-        .thenReturn(const ErrorState('Test Error Message'));
+      //act
+      await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+      await tester.pumpAndSettle();
 
-    //act
-    await tester.pumpWidget(_makeTestableWidget(const HomePage()));
-    await tester.pumpAndSettle();
+      expect(find.text('No data found'), findsOneWidget);
+    });
 
-    expect(find.text('No data found'), findsOneWidget);
-  });
+    testWidgets('should show no data found when there is no data',
+        (WidgetTester tester) async {
+      // arrange
+      whenListen(
+        mockProductBloc,
+        Stream.fromIterable([const ErrorState('msg')]),
+        initialState: const ErrorState('msg'),
+      );
 
-  testWidgets('should show no data found when there is no data',
-      (WidgetTester tester) async {
-    // arrange
-    whenListen(
-      mockProductBloc,
-      Stream.fromIterable([const ErrorState('msg')]),
-      initialState: const ErrorState('msg'),
-    );
+      // act
+      await tester.pumpWidget(_makeTestableWidget(const HomePage()));
 
-    // act
-    await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+      // assert
+      expect(find.text('No data found'), findsOneWidget);
+    });
 
-    // assert
-    expect(find.text('No data found'), findsOneWidget);
-  });
+    testWidgets('HomePage should have ProductCard',
+        (WidgetTester tester) async {
+      // Arrange
+      when(() => mockProductBloc.state)
+          .thenReturn(LoadedAllProductState(testProductEntityList));
 
-  testWidgets('HomePage should have ProductCard', (WidgetTester tester) async {
-    // Arrange
-    when(() => mockProductBloc.state)
-        .thenReturn(LoadedAllProductState(testProductEntityList));
+      // Act
+      await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+      await tester.pumpAndSettle(); // Wait for all animations/timers to finish
 
-    // Act
-    await tester.pumpWidget(_makeTestableWidget(const HomePage()));
-    await tester.pumpAndSettle(); // Wait for all animations/timers to finish
-
-    // Assert
-    expect(find.byType(ProductCard), findsWidgets);
+      // Assert
+      expect(find.byType(ProductCard), findsWidgets);
+    });
   });
 }
