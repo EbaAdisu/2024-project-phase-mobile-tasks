@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'injection_container.dart';
-import 'features/product/presentation/bloc/product_bloc.dart';
-import 'features/product/presentation/bloc/product_event.dart';
-import 'features/product/presentation/pages/add_page.dart';
 import 'features/auth/presentation/pages/sign_in_page.dart';
 import 'features/auth/presentation/pages/sign_up_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
+import 'features/product/presentation/bloc/product_bloc.dart';
+import 'features/product/presentation/bloc/product_event.dart';
+import 'features/product/presentation/pages/add_page.dart';
 import 'features/product/presentation/pages/detail_page.dart';
 import 'features/product/presentation/pages/home_page.dart';
 import 'features/product/presentation/pages/update_page.dart';
+import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
