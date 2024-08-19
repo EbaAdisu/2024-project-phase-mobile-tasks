@@ -81,6 +81,7 @@ void main() {
       expect(find.text('No data found'), findsOneWidget);
     });
 
+//////////////////////////////////
     testWidgets('HomePage should have ProductCard',
         (WidgetTester tester) async {
       // Arrange
@@ -89,8 +90,6 @@ void main() {
 
       // Act
       await tester.pumpWidget(_makeTestableWidget(const HomePage()));
-      await tester.pumpAndSettle(); // Wait for all animations/timers to finish
-
       // Assert
       expect(find.byType(ProductCard), findsWidgets);
     });

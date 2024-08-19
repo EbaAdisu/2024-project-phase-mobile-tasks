@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ecommerce_app/data/models/product_model.dart';
 import 'package:ecommerce_app/presentation/bloc/product_bloc.dart';
@@ -15,6 +17,7 @@ class MockProductBloc extends Mock implements ProductBloc {}
 void main() {
   late ProductBloc mockProductBloc;
   setUp(() {
+    HttpOverrides.global = null;
     mockProductBloc = MockProductBloc();
   });
 
@@ -28,6 +31,17 @@ void main() {
     ProductModel? product,
   }) {
     return MaterialApp(
+      routes: {
+        '/home': (context) => Scaffold(body: Text('Home Page')),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/home') {
+          return MaterialPageRoute(
+            builder: (context) => Scaffold(body: Text('Home Page')),
+          );
+        }
+        return null; // Return null if route is not found
+      },
       home: Scaffold(
         body: BlocProvider<ProductBloc>.value(
           value: mockProductBloc,
@@ -83,22 +97,6 @@ void main() {
           formKey: formKey,
           product: product,
         ),
-        // MaterialApp(
-        //   home: Scaffold(
-        //     body: BlocProvider<ProductBloc>.value(
-        //       value: mockProductBloc,
-        //       child: FormButton(
-        //         text: 'UPDATE',
-        //         nameController: nameController,
-        //         priceController: priceController,
-        //         descriptionController: descriptionController,
-        //         imageUrlController: imageUrlController,
-        //         formKey: formKey,
-        //         product: product,
-        //       ),
-        //     ),
-        //   ),
-        // ),
       );
 
       // Simulate button press
