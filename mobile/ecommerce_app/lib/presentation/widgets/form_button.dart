@@ -60,7 +60,7 @@ class FormButton extends StatelessWidget {
                 debugPrint('Product: Update success');
                 BlocProvider.of<ProductBloc>(context)
                     .add(const LoadAllProductEvent());
-                Navigator.pushNamed(context, '/');
+                Navigator.pushNamed(context, '/home');
               } else {
                 debugPrint('Error: $state');
               }
@@ -87,7 +87,7 @@ class FormButton extends StatelessWidget {
                   // add Load all products here and navigate to home
                   BlocProvider.of<ProductBloc>(context)
                       .add(const LoadAllProductEvent());
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushNamed(context, '/home');
                 } else {
                   debugPrint('Error: $state');
                 }

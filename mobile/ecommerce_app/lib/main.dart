@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Ecommerce App',
-        initialRoute: '/sign_up',
+        initialRoute: '/home',
         onGenerateRoute: (RouteSettings settings) {
           WidgetBuilder builder;
           // Match your route names here
