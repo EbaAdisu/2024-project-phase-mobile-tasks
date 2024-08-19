@@ -10,6 +10,9 @@ class Urls {
   static String product() {
     return '${baseUrL}/products?$apiKey';
   }
+
+  static String imageUrl =
+      'https://res.cloudinary.com/g5-mobile-track/image/upload/v1723932776/images/v6kve2yjfsodtzyhmj5q.png';
 }
 
 const cachedProducts = 'CACHED_PRODUCTS';

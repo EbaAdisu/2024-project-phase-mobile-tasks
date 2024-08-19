@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ecommerce_app/core/constants/constants.dart';
 import 'package:ecommerce_app/data/models/product_model.dart';
 import 'package:ecommerce_app/presentation/bloc/product_bloc.dart';
 import 'package:ecommerce_app/presentation/bloc/product_event.dart';
@@ -8,47 +11,58 @@ import 'package:ecommerce_app/presentation/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockProductBloc extends MockBloc<ProductEvent, ProductState>
     implements ProductBloc {}
-
-// class MockProductBloc extends MockBloc<ProductEvent, ProductState>
-//     implements ProductBloc {
-//   @override
-//   ProductState get state => LoadingState();
-// }
 
 void main() {
   late MockProductBloc mockProductBloc;
 
   setUp(() {
     mockProductBloc = MockProductBloc();
+    HttpOverrides.global = null;
   });
-  Widget makeTestableWidget({required Widget child}) {
-    return BlocProvider<ProductBloc>(
-      create: (context) => mockProductBloc,
+
+  Widget _makeTestableWidget(Widget body) {
+    return BlocProvider<ProductBloc>.value(
+      value: mockProductBloc,
       child: MaterialApp(
-        home: child,
+        home: body,
       ),
     );
   }
 
-  //  working
-  testWidgets('should show circular progress indicator when loading',
-      (WidgetTester tester) async {
-    // arrange
-    whenListen(
-      mockProductBloc,
-      Stream.fromIterable([LoadingState()]),
-      initialState: LoadingState(),
-    );
+  final testProductEntityList = [
+    ProductModel(
+      id: '1',
+      name: 'Test Pineapple',
+      description: 'A yellow pineapple for the summer',
+      imageUrl: Urls.imageUrl,
+      price: 5.33,
+    )
+  ];
 
-    // act
-    await tester.pumpWidget(makeTestableWidget(child: const HomePage()));
+  testWidgets('state should have a loading circle', (widgetTester) async {
+    //arrange
+    when(() => mockProductBloc.state).thenAnswer((_) => LoadingState());
 
-    // assert
+    //act
+    await widgetTester.pumpWidget(_makeTestableWidget(const HomePage()));
+
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+  testWidgets('Homepage shows error message when state is error',
+      (WidgetTester tester) async {
+    //arrange
+    when(() => mockProductBloc.state)
+        .thenReturn(const ErrorState('Test Error Message'));
+
+    //act
+    await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('No data found'), findsOneWidget);
   });
 
   testWidgets('should show no data found when there is no data',
@@ -61,81 +75,22 @@ void main() {
     );
 
     // act
-    await tester.pumpWidget(makeTestableWidget(child: const HomePage()));
+    await tester.pumpWidget(_makeTestableWidget(const HomePage()));
 
     // assert
     expect(find.text('No data found'), findsOneWidget);
   });
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  Not working
+  testWidgets('HomePage should have ProductCard', (WidgetTester tester) async {
+    // Arrange
+    when(() => mockProductBloc.state)
+        .thenReturn(LoadedAllProductState(testProductEntityList));
 
-  testWidgets('should  show CircularProgressIndicator on LodingState  ',
-      (widgetTester) async {
-    //  arrange
-    // when(() => mockProductBloc.state).thenAnswer((_) => (LoadingState()));
-    // when(() => mockProductBloc.state).thenReturn(InitialState());
+    // Act
+    await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+    await tester.pumpAndSettle(); // Wait for all animations/timers to finish
 
-    // when(() => mockProductBloc.state).thenAnswer((_) => (() => LoadingState()));
-    when(mockProductBloc.state).thenReturn(LoadingState());
-
-    // act
-    await widgetTester.pumpWidget(makeTestableWidget(child: const HomePage()));
-
-    // assert
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    // Assert
+    expect(find.byType(ProductCard), findsWidgets);
   });
-
-  testWidgets(
-      'should show list of products when state is LoadedAllProductState',
-      (WidgetTester tester) async {
-    // arrange
-    final products = [
-      const ProductModel(
-        id: '1',
-        name: 'Product 1',
-        price: 100,
-        imageUrl: 'https://example.com/image1.png',
-        description: 'Description 1',
-      ),
-      const ProductModel(
-        id: '2',
-        name: 'Product 2',
-        price: 200,
-        imageUrl: 'https://example.com/image2.png',
-        description: 'Description 2',
-      ),
-    ];
-
-    whenListen(
-      mockProductBloc,
-      Stream.fromIterable([LoadedAllProductState(products)]),
-      initialState: LoadedAllProductState(products),
-    );
-
-    // act
-    await tester.pumpWidget(makeTestableWidget(child: const HomePage()));
-
-    // assert
-    expect(find.byType(ListView), findsNWidgets(1));
-  });
-
-  // testWidgets(
-  //     'should trigger LoadAllProductEvent when refresh button is tapped',
-  //     (WidgetTester tester) async {
-  //   // arrange
-  //   whenListen(
-  //     mockProductBloc,
-  //     Stream.fromIterable([const LoadedAllProductState([])]),
-  //     initialState: InitialState(),
-  //   );
-
-  //   // act
-  //   await tester.pumpWidget(makeTestableWidget(child: const HomePage()));
-  //   await tester.tap(find.byIcon(Icons.restart_alt_outlined));
-  //   await tester.pumpAndSettle();
-
-  //   // assert
-  //   verify(mockProductBloc.add(const LoadAllProductEvent())).called(1);
-  // });
 }
