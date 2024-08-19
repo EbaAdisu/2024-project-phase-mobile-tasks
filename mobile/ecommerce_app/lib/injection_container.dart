@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/platform/client.dart';
 import 'core/platform/network_info.dart';
 import 'features/product/data/data_sources/local_data_source.dart';
 import 'features/product/data/data_sources/remote_data_source.dart';
@@ -28,6 +29,7 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
 
   // Data sources
+  locator.registerLazySingleton<Client>(() => ClientImpl(client: locator()));
   locator.registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<ProductLocalDataSource>(
