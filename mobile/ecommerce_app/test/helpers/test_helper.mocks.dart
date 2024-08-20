@@ -4,14 +4,18 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:convert' as _i21;
-import 'dart:typed_data' as _i23;
+import 'dart:convert' as _i23;
+import 'dart:typed_data' as _i25;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ecommerce_app/core/error/failure.dart' as _i9;
 import 'package:ecommerce_app/core/platform/client.dart' as _i6;
 import 'package:ecommerce_app/core/platform/network_info.dart' as _i14;
 import 'package:ecommerce_app/core/usecase/usecase.dart' as _i19;
+import 'package:ecommerce_app/features/auth/domain/entities/user_entity.dart'
+    as _i22;
+import 'package:ecommerce_app/features/auth/domain/repository/auth_repository.dart'
+    as _i21;
 import 'package:ecommerce_app/features/product/data/data_sources/local_data_source.dart'
     as _i12;
 import 'package:ecommerce_app/features/product/data/data_sources/remote_data_source.dart'
@@ -36,7 +40,7 @@ import 'package:http/http.dart' as _i7;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i22;
+import 'package:mockito/src/dummies.dart' as _i24;
 import 'package:shared_preferences/shared_preferences.dart' as _i13;
 
 // ignore_for_file: type=lint
@@ -908,6 +912,85 @@ class MockClient extends _i1.Mock implements _i6.Client {
       ) as _i8.Future<_i6.HttpResponse>);
 }
 
+/// A class which mocks [AuthRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthRepository extends _i1.Mock implements _i21.AuthRepository {
+  MockAuthRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>> signUpUser(
+          _i22.UserEntity? user) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUpUser,
+          [user],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i22.UserEntity>(
+          this,
+          Invocation.method(
+            #signUpUser,
+            [user],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>> logInUser(
+          _i22.UserEntity? user) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logInUser,
+          [user],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i22.UserEntity>(
+          this,
+          Invocation.method(
+            #logInUser,
+            [user],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>> logOutUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logOutUser,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i22.UserEntity>(
+          this,
+          Invocation.method(
+            #logOutUser,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>> getCurrentUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCurrentUser,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i22.UserEntity>(
+          this,
+          Invocation.method(
+            #getCurrentUser,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i22.UserEntity>>);
+}
+
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -963,7 +1046,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i21.Encoding? encoding,
+    _i23.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -994,7 +1077,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i21.Encoding? encoding,
+    _i23.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1025,7 +1108,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i21.Encoding? encoding,
+    _i23.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1056,7 +1139,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i21.Encoding? encoding,
+    _i23.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1093,7 +1176,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i8.Future<String>.value(_i22.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i24.dummyValue<String>(
           this,
           Invocation.method(
             #read,
@@ -1104,7 +1187,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
       ) as _i8.Future<String>);
 
   @override
-  _i8.Future<_i23.Uint8List> readBytes(
+  _i8.Future<_i25.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -1114,8 +1197,8 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i8.Future<_i23.Uint8List>.value(_i23.Uint8List(0)),
-      ) as _i8.Future<_i23.Uint8List>);
+        returnValue: _i8.Future<_i25.Uint8List>.value(_i25.Uint8List(0)),
+      ) as _i8.Future<_i25.Uint8List>);
 
   @override
   _i8.Future<_i7.StreamedResponse> send(_i7.BaseRequest? request) =>

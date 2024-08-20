@@ -6,14 +6,14 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/user_entity.dart';
 import '../repository/auth_repository.dart';
 
-class SignUpUseCase extends UseCase<UserEntity, Params> {
+class LogInUseCase extends UseCase<UserEntity, Params> {
   final AuthRepository authRepository;
 
-  SignUpUseCase(this.authRepository);
+  LogInUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, UserEntity>> call(Params params) async {
-    return await authRepository.signUpUser(params.user);
+    return await authRepository.logInUser(params.user);
   }
 }
 

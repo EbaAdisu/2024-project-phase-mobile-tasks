@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/failure.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product_entity.dart';
-import 'package:ecommerce_app/features/product/domain/usecases/update_product.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/view_specific_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late UpdateProductUsecase updateProductUsecase;
+  late ViewProductUsecase viewProductUsecase;
   late MockProductRepository mockProductRepository;
   setUp(() {
     mockProductRepository = MockProductRepository();
-    updateProductUsecase = UpdateProductUsecase(mockProductRepository);
+    viewProductUsecase = ViewProductUsecase(mockProductRepository);
   });
   const testproduct = ProductEntity(
     id: '1',
@@ -21,16 +21,17 @@ void main() {
     description: 'description',
     imageUrl: 'image_url',
   );
+  const testPoductId = '1';
   test(
-    'should call updateProduct from ProductRepository',
+    'should call getProduct from ProductRepository',
     () async {
       // arrange
-      when(mockProductRepository.updateProduct(testproduct))
+      when(mockProductRepository.getProduct(testPoductId))
           .thenAnswer((_) async => const Right(testproduct));
 
       // act
       final result =
-          await updateProductUsecase(const Params(product: testproduct));
+          await viewProductUsecase(const Params(productId: testPoductId));
 
       // assert
       expect(result, const Right(testproduct));
@@ -40,12 +41,12 @@ void main() {
     'should return failure when product repository return failure',
     () async {
       // arrange
-      when(mockProductRepository.updateProduct(testproduct))
+      when(mockProductRepository.getProduct(testPoductId))
           .thenAnswer((_) async => const Left(ServerFailure('error')));
 
       // act
       final result =
-          await updateProductUsecase(const Params(product: testproduct));
+          await viewProductUsecase(const Params(productId: testPoductId));
 
       // assert
       expect(result, const Left(ServerFailure('error')));
