@@ -16,10 +16,12 @@ class RegisterUsecase implements UseCase<Unit, RegisterParams> {
   }
 }
 
-class RegisterParams extends Equatable{
+class RegisterParams extends Equatable {
   final RegistrationEntity registrationEntity;
 
-  RegisterParams({required this.registrationEntity});
+  const RegisterParams({
+    required this.registrationEntity,
+  });
 
   @override
   List<Object?> get props => [registrationEntity];

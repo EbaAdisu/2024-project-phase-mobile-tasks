@@ -5,7 +5,11 @@ class RegistrationEntity extends Equatable {
   final String email;
   final String password;
 
-  RegistrationEntity({required this.name, required this.email, required this.password});
+  const RegistrationEntity({
+    required this.name,
+    required this.email,
+    required this.password,
+  });
 
   @override
   List<Object?> get props => [name, email, password];

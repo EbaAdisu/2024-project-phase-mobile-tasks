@@ -45,11 +45,11 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   }
 
   @override
-  Future<Unit> logout(){
-    try{
+  Future<Unit> logout() {
+    try {
       sharedPreferences.remove(TOKEN);
       return Future.value(unit);
-    } catch(e){
+    } catch (e) {
       throw CacheException();
     }
   }

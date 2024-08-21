@@ -5,13 +5,18 @@ class RegisterModel extends RegistrationEntity {
       {required super.name, required super.email, required super.password});
 
   Map<String, dynamic> toJson() {
-    return {'name': name, 'email': email, 'password': password};
+    return {
+      'name': name,
+      'email': email,
+      'password': password,
+    };
   }
 
   static RegisterModel toModel(RegistrationEntity registrationEntity) {
     return RegisterModel(
-        name: registrationEntity.name,
-        email: registrationEntity.email,
-        password: registrationEntity.password);
+      name: registrationEntity.name,
+      email: registrationEntity.email,
+      password: registrationEntity.password,
+    );
   }
 }
