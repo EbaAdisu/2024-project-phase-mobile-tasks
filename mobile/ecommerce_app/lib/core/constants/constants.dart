@@ -13,6 +13,18 @@ class Urls {
 
   static String imageUrl =
       'https://res.cloudinary.com/g5-mobile-track/image/upload/v1723932776/images/v6kve2yjfsodtzyhmj5q.png';
+  static String authUrl = '${baseUrL}/auth';
 }
 
 const cachedProducts = 'CACHED_PRODUCTS';
+
+class ErrorMessages {
+  static const String noInternet = 'Failed to connect to the internet';
+  static const String somethingWentWrong = 'Something went wrong';
+  static const String serverError = 'An error has occurred';
+  static const String cacheError = 'Failed to load cache';
+  static const String socketError =
+      'No Internet connection or server unreachable';
+  static const String forbiddenError = 'Invalid Credentials! Please try again';
+  static const String userAlreadyExists = 'User Already Exists';
+}

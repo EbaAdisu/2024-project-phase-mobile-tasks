@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../product/presentation/widgets/form_button.dart';
-import '../../../product/presentation/widgets/form_text_field.dart';
+import '../widgets/auth_form_text_field.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final ValueNotifier<bool> _checkboxValueNotifier = ValueNotifier<bool>(false);
   @override
@@ -49,19 +50,19 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              FormTextField(
+              AuthFormTextField(
                 text: 'Name',
                 controller: nameController,
               ),
-              FormTextField(
+              AuthFormTextField(
                 text: 'Email',
                 controller: emailController,
               ),
-              FormTextField(
+              AuthFormTextField(
                 text: 'Password',
                 controller: passwordController,
               ),
-              FormTextField(
+              AuthFormTextField(
                 text: 'Confirm Password',
                 controller: confirmPasswordController,
               ),

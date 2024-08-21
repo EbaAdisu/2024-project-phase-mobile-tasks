@@ -27,3 +27,15 @@ class CacheFailure extends Failure {
 class ImageUploadFailure extends Failure {
   const ImageUploadFailure(super.message);
 }
+
+class RandomFailure extends Failure {
+  const RandomFailure(String message) : super(message);
+}
+
+class UnauthorizedFailure extends Failure {
+  UnauthorizedFailure(super.message);
+}
+
+class UserAlreadyExistsFailure extends Failure {
+  UserAlreadyExistsFailure(super.message);
+}

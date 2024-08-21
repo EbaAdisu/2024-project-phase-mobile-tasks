@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../product/presentation/widgets/form_button.dart';
-import '../../../product/presentation/widgets/form_text_field.dart';
+import '../widgets/auth_form_button.dart';
+import '../widgets/auth_form_text_field.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   // get width of  the screen
   // double width = MediaQuery.of(context).size.width;
 
@@ -51,18 +51,18 @@ class SignInPage extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              FormTextField(
+              AuthFormTextField(
                 text: 'Email',
                 controller: emailController,
               ),
-              FormTextField(
+              AuthFormTextField(
                 text: 'Password',
                 controller: passwordController,
               ),
               const SizedBox(height: 20),
 
               // Add a button to navigate to the sign-up page
-              const FormButton(text: 'Sign In'),
+              const AuthFormButton(text: 'Sign In'),
               const SizedBox(
                 height: 150,
               ),
