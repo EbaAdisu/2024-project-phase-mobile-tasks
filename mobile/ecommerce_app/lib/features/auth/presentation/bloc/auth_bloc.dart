@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/usecase/usecase.dart';
 import '../../domain/entities/login_entity.dart';
@@ -24,16 +25,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       : super(AuthInitial()) {
     on<LoginEvent>((event, emit) async {
       emit(AuthLoading());
+      debugPrint('auth bloc LoginEvent: ${event.loginEntity}');
       final result =
           await _loginUsecase(LoginParams(loginEntity: event.loginEntity));
+      debugPrint('auth bloc result: $result');
+
       result.fold((failure) => emit(AuthError(message: failure.message)),
           (userData) => emit(AuthSuccess()));
     });
 
     on<RegisterEvent>((event, emit) async {
       emit(AuthLoading());
+      debugPrint('auth bloc LoginEvent: ${event.registrationEntity}');
+
       final result = await _registerUsecase(
           RegisterParams(registrationEntity: event.registrationEntity));
+      debugPrint('auth bloc result: $result');
       result.fold((failure) => emit(AuthError(message: failure.message)),
           (userData) => emit(AuthRegisterSuccess()));
     });

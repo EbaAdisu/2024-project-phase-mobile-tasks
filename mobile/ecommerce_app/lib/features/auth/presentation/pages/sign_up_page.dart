@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../product/presentation/widgets/form_button.dart';
+import '../widgets/auth_form_button.dart';
 import '../widgets/auth_form_text_field.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -12,6 +12,7 @@ class SignUpPage extends StatelessWidget {
       TextEditingController();
 
   final ValueNotifier<bool> _checkboxValueNotifier = ValueNotifier<bool>(false);
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -32,118 +33,128 @@ class SignUpPage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(width * 0.12),
-          child: Column(
-            children: [
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Create your account',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.6,
-                    decoration: TextDecoration.none,
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.all(width * 0.12),
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Create your account',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.6,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 40),
-              AuthFormTextField(
-                text: 'Name',
-                controller: nameController,
-              ),
-              AuthFormTextField(
-                text: 'Email',
-                controller: emailController,
-              ),
-              AuthFormTextField(
-                text: 'Password',
-                controller: passwordController,
-              ),
-              AuthFormTextField(
-                text: 'Confirm Password',
-                controller: confirmPasswordController,
-              ),
-              const SizedBox(height: 20),
-              // argiment to understand the terms and conditions
-              Row(
-                children: [
-                  ValueListenableBuilder<bool>(
-                    valueListenable: _checkboxValueNotifier,
-                    builder: (context, value, child) {
-                      return Checkbox(
-                        value: value,
-                        // make the checkbox color blue
-                        activeColor: Colors.blue,
-                        onChanged: (bool? newValue) {
-                          _checkboxValueNotifier.value = newValue ?? false;
-                        },
-                      );
-                    },
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
-                      children: const <TextSpan>[
-                        TextSpan(
-                            text: 'I understood the ',
+                const SizedBox(height: 40),
+                AuthFormTextField(
+                  text: 'Name',
+                  controller: nameController,
+                ),
+                AuthFormTextField(
+                  text: 'Email',
+                  controller: emailController,
+                ),
+                AuthFormTextField(
+                  text: 'Password',
+                  controller: passwordController,
+                ),
+                AuthFormTextField(
+                  text: 'Confirm Password',
+                  controller: confirmPasswordController,
+                ),
+                const SizedBox(height: 20),
+                // argiment to understand the terms and conditions
+                Row(
+                  children: [
+                    ValueListenableBuilder<bool>(
+                      valueListenable: _checkboxValueNotifier,
+                      builder: (context, value, child) {
+                        return Checkbox(
+                          value: value,
+                          // make the checkbox color blue
+                          activeColor: Colors.blue,
+                          onChanged: (bool? newValue) {
+                            _checkboxValueNotifier.value = newValue ?? false;
+                          },
+                        );
+                      },
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: const <TextSpan>[
+                          TextSpan(
+                              text: 'I understood the ',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                decoration: TextDecoration.none,
+                              )),
+                          TextSpan(
+                            text: 'terms & policy',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.blue,
                               fontSize: 13,
                               decoration: TextDecoration.none,
-                            )),
-                        TextSpan(
-                          text: 'terms & policy',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 13,
-                            decoration: TextDecoration.none,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const FormButton(text: 'Sign up'),
-              const SizedBox(
-                height: 150,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                // remove the space between the children
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Have an account?',
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontSize: 18,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w500,
-                        // add spacing
-                        letterSpacing: 1.3,
-                      )),
-                  TextButton(
-                    child: const Text(
-                      'SIGN IN',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 20,
+                        ],
                       ),
                     ),
-                    onPressed: () {
-                      // Navigate to the sign-up page
-                      Navigator.pushNamed(
-                        context,
-                        '/sign_in',
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                AuthFormButton(
+                  text: 'Sign Up',
+                  formKey: _formKey,
+                  nameController: nameController,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  confirmPasswordController: confirmPasswordController,
+                ),
+                const SizedBox(
+                  height: 150,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // remove the space between the children
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Have an account?',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 18,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w500,
+                          // add spacing
+                          letterSpacing: 1.3,
+                        )),
+                    TextButton(
+                      child: const Text(
+                        'SIGN IN',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                        ),
+                      ),
+                      onPressed: () {
+                        // Navigate to the sign-up page
+                        Navigator.pushNamed(
+                          context,
+                          '/sign_in',
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

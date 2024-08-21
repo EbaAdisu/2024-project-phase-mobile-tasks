@@ -47,9 +47,11 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> login(LoginEntity loginEntity) async {
     if (await networkInfo.isConnected) {
+      debugPrint('auth repo LoginEntity: $loginEntity');
       try {
         final result =
             await remoteDataSource.login(LoginModel.toModel(loginEntity));
+        debugPrint('auth repo result: $result');
         try {
           await localDataSource.cacheToken(result.token);
         } on CacheException {
@@ -71,10 +73,12 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> register(
       RegistrationEntity registrationEntity) async {
+    debugPrint('auth repo RegistrationEntity: $registrationEntity');
     if (await networkInfo.isConnected) {
       try {
         final result = await remoteDataSource
             .register(RegisterModel.toModel(registrationEntity));
+        debugPrint('auth repo result: $result');
         return Right(result);
       } on ServerException {
         return const Left(ServerFailure(ErrorMessages.serverError));

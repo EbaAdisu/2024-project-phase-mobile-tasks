@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/pages/sign_in_page.dart';
 import 'features/auth/presentation/pages/sign_up_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductBloc>(
           create: (context) =>
               locator<ProductBloc>()..add(const LoadAllProductEvent()),
+        ),
+        BlocProvider<AuthBloc>(
+          create: (context) => locator<AuthBloc>(),
         ),
       ],
       child: MaterialApp(
