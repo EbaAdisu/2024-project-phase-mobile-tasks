@@ -1,7 +1,10 @@
 import '../../domain/entities/login_entity.dart';
 
 class LoginModel extends LoginEntity {
-  LoginModel({required super.email, required super.password});
+  const LoginModel({
+    required super.email,
+    required super.password,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -10,10 +13,10 @@ class LoginModel extends LoginEntity {
     };
   }
 
-  static LoginModel toModel(LoginEntity login_entity) {
+  static LoginModel toModel(LoginEntity loginEntity) {
     return LoginModel(
-      email: login_entity.email,
-      password: login_entity.password,
+      email: loginEntity.email,
+      password: loginEntity.password,
     );
   }
 }

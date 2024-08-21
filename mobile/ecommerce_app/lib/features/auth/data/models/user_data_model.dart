@@ -2,7 +2,10 @@ import '../../../../core/error/exception.dart';
 import '../../domain/entities/user_data_entity.dart';
 
 class UserDataModel extends UserDataEntity {
-  UserDataModel({required super.email, required super.name});
+  const UserDataModel({
+    required super.email,
+    required super.name,
+  });
 
   UserDataEntity toEntity() => UserDataEntity(
         email: email,

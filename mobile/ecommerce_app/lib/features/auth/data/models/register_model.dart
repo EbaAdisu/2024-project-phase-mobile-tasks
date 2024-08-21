@@ -1,8 +1,11 @@
 import '../../domain/entities/register_entity.dart';
 
 class RegisterModel extends RegistrationEntity {
-  RegisterModel(
-      {required super.name, required super.email, required super.password});
+  const RegisterModel({
+    required super.name,
+    required super.email,
+    required super.password,
+  });
 
   Map<String, dynamic> toJson() {
     return {

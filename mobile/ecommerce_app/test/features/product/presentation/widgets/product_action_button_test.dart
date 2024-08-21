@@ -36,7 +36,7 @@ void main() {
         MaterialApp(
           home: BlocProvider<ProductBloc>(
             create: (context) => mockProductBloc,
-            child: Scaffold(
+            child: const Scaffold(
               body: ProductActionButton(
                 action: 'DELETE',
                 product: product,
@@ -68,7 +68,7 @@ void main() {
           imageUrl: 'http://example.com/image.png');
 
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductActionButton(
               action: 'DELETE',
@@ -96,7 +96,7 @@ void main() {
           imageUrl: 'http://example.com/image.png');
 
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductActionButton(
               action: 'UPDATE',

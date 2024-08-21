@@ -22,7 +22,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: Padding(
-          padding: EdgeInsets.all(18.0),
+          padding: const EdgeInsets.all(18.0),
           child: Column(
             children: [
               Expanded(child: ProductCard(product: product)),

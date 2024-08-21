@@ -12,7 +12,7 @@ void main() {
     HttpOverrides.global = null;
   });
   testWidgets('UpdatePage test', (WidgetTester tester) async {
-    final product = ProductModel(
+    const product = ProductModel(
       id: '1',
       name: 'Test Product',
       description: 'This is a test product',
@@ -32,7 +32,7 @@ void main() {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => UpdatePage(),
-                        settings: RouteSettings(arguments: product),
+                        settings: const RouteSettings(arguments: product),
                       ),
                     );
                   },

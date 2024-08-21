@@ -24,7 +24,7 @@ void main() {
     HttpOverrides.global = null;
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<ProductBloc>.value(
       value: mockProductBloc,
       child: MaterialApp(
@@ -48,7 +48,7 @@ void main() {
       when(() => mockProductBloc.state).thenAnswer((_) => LoadingState());
 
       //act
-      await widgetTester.pumpWidget(_makeTestableWidget(const HomePage()));
+      await widgetTester.pumpWidget(makeTestableWidget(const HomePage()));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
@@ -59,7 +59,7 @@ void main() {
           .thenReturn(const ErrorState('Test Error Message'));
 
       //act
-      await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomePage()));
       await tester.pumpAndSettle();
 
       expect(find.text('No data found'), findsOneWidget);
@@ -75,7 +75,7 @@ void main() {
       );
 
       // act
-      await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomePage()));
 
       // assert
       expect(find.text('No data found'), findsOneWidget);
@@ -89,7 +89,7 @@ void main() {
           .thenReturn(LoadedAllProductState(testProductEntityList));
 
       // Act
-      await tester.pumpWidget(_makeTestableWidget(const HomePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomePage()));
       // Assert
       expect(find.byType(ProductCard), findsWidgets);
     });

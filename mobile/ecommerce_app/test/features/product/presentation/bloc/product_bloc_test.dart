@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/failure.dart';
@@ -96,7 +98,8 @@ void main() {
       build: () {
         when(mockDeleteProductUsecase(
                 const delete_usecase.Params(productId: productId)))
-            .thenAnswer((_) async => const Right(true));
+            // ignore: void_checks
+            .thenAnswer((_) async => const Right(Void));
         return productBloc;
       },
       act: (bloc) => bloc.add(const DeleteProductEvent(productId)),

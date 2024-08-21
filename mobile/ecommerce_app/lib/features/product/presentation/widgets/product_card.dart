@@ -34,10 +34,10 @@ class ProductCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: product?.imageUrl ?? '',
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
               const SizedBox(

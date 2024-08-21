@@ -65,7 +65,7 @@ class UpdatePage extends StatelessWidget {
                   formKey: _formKey,
                 ),
                 const SizedBox(height: 20),
-                FormButton(
+                const FormButton(
                   text: 'CANCEL',
                 ),
               ],

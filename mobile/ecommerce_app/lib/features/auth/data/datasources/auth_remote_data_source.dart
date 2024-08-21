@@ -12,8 +12,8 @@ import '../models/register_model.dart';
 import '../models/user_data_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<AuthenticatedModel> login(LoginModel login_model);
-  Future<Unit> register(RegisterModel register_model);
+  Future<AuthenticatedModel> login(LoginModel loginModel);
+  Future<Unit> register(RegisterModel registerModel);
   Future<UserDataModel> getUser(String token);
 }
 
@@ -41,10 +41,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthenticatedModel> login(LoginModel login_model) async {
+  Future<AuthenticatedModel> login(LoginModel loginModel) async {
     var uri = Uri.parse('${Urls.authUrl}/auth/login');
     try {
-      final response = await client.post(uri, body: login_model.toJson());
+      final response = await client.post(uri, body: loginModel.toJson());
       if (response.statusCode == 201) {
         return AuthenticatedModel.fromJson(json.decode(response.body)['data']);
       } else if (response.statusCode == 401) {
@@ -58,11 +58,11 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Unit> register(RegisterModel register_model) async {
+  Future<Unit> register(RegisterModel registerModel) async {
     var uri = Uri.parse('${Urls.authUrl}/auth/register');
 
     try {
-      final response = await client.post(uri, body: register_model.toJson());
+      final response = await client.post(uri, body: registerModel.toJson());
       if (response.statusCode == 201) {
         return unit;
       } else if (response.statusCode == 409) {

@@ -16,7 +16,7 @@ void main() {
     registerUsecase = RegisterUsecase(mockAuthRepository);
   });
 
-  final tRegisterEntity = RegistrationEntity(
+  const tRegisterEntity = RegistrationEntity(
     email: 'sd@gmail.com',
     password: '123456',
     name: 'Simon',
@@ -30,7 +30,7 @@ void main() {
 
       //act
       final result = await registerUsecase(
-          RegisterParams(registrationEntity: tRegisterEntity));
+          const RegisterParams(registrationEntity: tRegisterEntity));
 
       //assert
       expect(result, const Right(unit));
@@ -42,7 +42,7 @@ void main() {
 
       //act
       final result = await registerUsecase(
-          RegisterParams(registrationEntity: tRegisterEntity));
+          const RegisterParams(registrationEntity: tRegisterEntity));
 
       //assert
       expect(result, const Left(ServerFailure('test error message')));

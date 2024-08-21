@@ -22,9 +22,15 @@ void main() {
     authRemoteDataSourceImpl = AuthRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  final tLoginModel = LoginModel(email: 'email', password: 'password');
-  final tRegisterModel =
-      RegisterModel(email: 'email', password: 'password', name: 'name');
+  const tLoginModel = LoginModel(
+    email: 'email',
+    password: 'password',
+  );
+  const tRegisterModel = RegisterModel(
+    email: 'email',
+    password: 'password',
+    name: 'name',
+  );
 
   group('Login Impl', () {
     final jsonLoginResponse = jsonEncode({
@@ -36,7 +42,7 @@ void main() {
       }
     });
 
-    final tAuthModel = AuthenticatedModel(
+    const tAuthModel = AuthenticatedModel(
         token:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwic3ViIjoiNjZiZGUzNmU5YmJlMDdmYzM5MDM0Y2RkIiwiaWF0IjoxNzI0MTQ0MjQzLCJleHAiOjE3MjQ1NzYyNDN9.oyC9gsD5ozRSCRMsC8M5WE8Wwxyzsbcn6-l7dLS8fsQ');
 
@@ -124,11 +130,11 @@ void main() {
         'name': 'Mr. User'
       }
     });
-    final tUserDataModel = UserDataModel(
+    const tUserDataModel = UserDataModel(
       email: 'user@gmail.com',
       name: 'Mr. User',
     );
-    final tToken =
+    const tToken =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwic3ViIjoiNjZiZGUzNmU5YmJlMDdmYzM5MDM0Y2RkIiwiaWF0IjoxNzI0MTQ3MzA2LCJleHAiOjE3MjQ1NzkzMDZ9.G2g2i_llh6EdyO4lD08pBCUYSwBvoqhbSMLPHW-jHlw';
     test('should return an AuthenticatedModel when successful', () async {
       //arrange

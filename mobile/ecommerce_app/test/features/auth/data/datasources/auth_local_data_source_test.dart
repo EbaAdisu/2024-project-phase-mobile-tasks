@@ -18,7 +18,7 @@ void main() {
   });
 
   group('AuthLocalDataSource', () {
-    final tToken = '1234';
+    const tToken = '1234';
     test('getToken', () async {
       //arrange
       when(mockSharedPreferences.getString(any))
@@ -28,7 +28,7 @@ void main() {
       final result = await authLocalDataSourceImpl.getToken();
 
       //assert
-      expect(result, '1234');
+      expect(result, tToken);
     });
 
     test('cacheToken', () async {

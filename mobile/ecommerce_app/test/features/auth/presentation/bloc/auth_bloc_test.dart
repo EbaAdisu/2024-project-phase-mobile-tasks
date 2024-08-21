@@ -33,10 +33,19 @@ void main() {
     );
   });
 
-  final tLoginEntity = LoginEntity(email: 'email', password: 'password');
-  final tRegistrationEntity =
-      RegistrationEntity(email: 'email', password: 'password', name: 'name');
-  final tUserDataEntity = UserDataEntity(email: 'email', name: 'name');
+  const tLoginEntity = LoginEntity(
+    email: 'email',
+    password: 'password',
+  );
+  const tRegistrationEntity = RegistrationEntity(
+    email: 'email',
+    password: 'password',
+    name: 'name',
+  );
+  const tUserDataEntity = UserDataEntity(
+    email: 'email',
+    name: 'name',
+  );
   test('initial state should be AuthInitial', () {
     expect(authBloc.state, AuthInitial());
   });
@@ -47,11 +56,10 @@ void main() {
           return authBloc;
         },
         setUp: () {
-          when(mockLoginUsecase(LoginParams(loginEntity: tLoginEntity)))
+          when(mockLoginUsecase(const LoginParams(loginEntity: tLoginEntity)))
               .thenAnswer((_) async => const Right(unit));
-          return authBloc;
         },
-        act: (bloc) => bloc.add(LoginEvent(loginEntity: tLoginEntity)),
+        act: (bloc) => bloc.add(const LoginEvent(loginEntity: tLoginEntity)),
         expect: () => [AuthLoading(), AuthSuccess()]);
 
     blocTest(
@@ -60,12 +68,11 @@ void main() {
         return authBloc;
       },
       setUp: () {
-        when(mockLoginUsecase(LoginParams(loginEntity: tLoginEntity)))
+        when(mockLoginUsecase(const LoginParams(loginEntity: tLoginEntity)))
             .thenAnswer((_) async => const Left(ServerFailure('error')));
-        return authBloc;
       },
-      act: (bloc) => bloc.add(LoginEvent(loginEntity: tLoginEntity)),
-      expect: () => [AuthLoading(), AuthError(message: 'error')],
+      act: (bloc) => bloc.add(const LoginEvent(loginEntity: tLoginEntity)),
+      expect: () => [AuthLoading(), const AuthError(message: 'error')],
     );
   });
   group('RegisterEvent', () {
@@ -74,13 +81,12 @@ void main() {
           return authBloc;
         },
         setUp: () {
-          when(mockRegisterUsecase(
-                  RegisterParams(registrationEntity: tRegistrationEntity)))
+          when(mockRegisterUsecase(const RegisterParams(
+                  registrationEntity: tRegistrationEntity)))
               .thenAnswer((_) async => const Right(unit));
-          return authBloc;
         },
-        act: (bloc) =>
-            bloc.add(RegisterEvent(registrationEntity: tRegistrationEntity)),
+        act: (bloc) => bloc
+            .add(const RegisterEvent(registrationEntity: tRegistrationEntity)),
         expect: () => [AuthLoading(), AuthRegisterSuccess()]);
 
     blocTest(
@@ -90,13 +96,12 @@ void main() {
       },
       setUp: () {
         when(mockRegisterUsecase(
-                RegisterParams(registrationEntity: tRegistrationEntity)))
+                const RegisterParams(registrationEntity: tRegistrationEntity)))
             .thenAnswer((_) async => const Left(ServerFailure('error')));
-        return authBloc;
       },
-      act: (bloc) =>
-          bloc.add(RegisterEvent(registrationEntity: tRegistrationEntity)),
-      expect: () => [AuthLoading(), AuthError(message: 'error')],
+      act: (bloc) => bloc
+          .add(const RegisterEvent(registrationEntity: tRegistrationEntity)),
+      expect: () => [AuthLoading(), const AuthError(message: 'error')],
     );
   });
 
@@ -107,13 +112,12 @@ void main() {
         },
         setUp: () {
           when(mockGetUserUsecase(NoParams()))
-              .thenAnswer((_) async => Right(tUserDataEntity));
-          return authBloc;
+              .thenAnswer((_) async => const Right(tUserDataEntity));
         },
         act: (bloc) => bloc.add(GetUserEvent()),
         expect: () => [
               AuthLoading(),
-              AuthAuthenticated(userDataEntity: tUserDataEntity)
+              const AuthAuthenticated(userDataEntity: tUserDataEntity)
             ]);
 
     blocTest(
@@ -124,10 +128,9 @@ void main() {
       setUp: () {
         when(mockGetUserUsecase(NoParams()))
             .thenAnswer((_) async => const Left(ServerFailure('error')));
-        return authBloc;
       },
       act: (bloc) => bloc.add(GetUserEvent()),
-      expect: () => [AuthLoading(), AuthError(message: 'error')],
+      expect: () => [AuthLoading(), const AuthError(message: 'error')],
     );
   });
 
@@ -139,7 +142,6 @@ void main() {
         setUp: () {
           when(mockLogoutUsecase(NoParams()))
               .thenAnswer((_) async => const Right(unit));
-          return authBloc;
         },
         act: (bloc) => bloc.add(LogoutEvent()),
         expect: () => [AuthLoading(), AuthLoggedOut()]);
@@ -152,10 +154,9 @@ void main() {
       setUp: () {
         when(mockLogoutUsecase(NoParams()))
             .thenAnswer((_) async => const Left(ServerFailure('error')));
-        return authBloc;
       },
       act: (bloc) => bloc.add(LogoutEvent()),
-      expect: () => [AuthLoading(), AuthError(message: 'error')],
+      expect: () => [AuthLoading(), const AuthError(message: 'error')],
     );
   });
 }

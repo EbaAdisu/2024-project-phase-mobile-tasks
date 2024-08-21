@@ -29,13 +29,13 @@ class ImageUploadFailure extends Failure {
 }
 
 class RandomFailure extends Failure {
-  const RandomFailure(String message) : super(message);
+  const RandomFailure(super.message);
 }
 
 class UnauthorizedFailure extends Failure {
-  UnauthorizedFailure(super.message);
+  const UnauthorizedFailure(super.message);
 }
 
 class UserAlreadyExistsFailure extends Failure {
-  UserAlreadyExistsFailure(super.message);
+  const UserAlreadyExistsFailure(super.message);
 }

@@ -17,19 +17,22 @@ void main() {
     getUserUsecase = GetUserUsecase(mockAuthRepository);
   });
 
-  final tUserDataEntity = UserDataEntity(email: 'email', name: 'name');
+  const tUserDataEntity = UserDataEntity(
+    email: 'email',
+    name: 'name',
+  );
 
   group('LogoutUsecase', () {
     test('should return userdataentity if successful', () async {
       //arrange
       when(mockAuthRepository.getUser())
-          .thenAnswer((_) async => Right(tUserDataEntity));
+          .thenAnswer((_) async => const Right(tUserDataEntity));
 
       //act
       final result = await getUserUsecase(NoParams());
 
       //assert
-      expect(result, Right(tUserDataEntity));
+      expect(result, const Right(tUserDataEntity));
     });
     test('should return failure if unsuccessful', () async {
       //arrange

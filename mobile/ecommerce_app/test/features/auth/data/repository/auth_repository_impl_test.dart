@@ -31,21 +31,39 @@ void main() {
         networkInfo: mockNetworkInfo);
   });
 
-  final tLoginModel = LoginModel(email: 'email', password: 'password');
-  final tLoginEntity = LoginEntity(email: 'email', password: 'password');
-  final tRegisterModel =
-      RegisterModel(email: 'email', password: 'password', name: 'name');
-  final tRegisterEntity =
-      RegistrationEntity(email: 'email', password: 'password', name: 'name');
-  final tUserDataModel = UserDataModel(name: 'name', email: 'email');
-  final tUserDataEntity = UserDataEntity(name: 'name', email: 'email');
+  const tLoginModel = LoginModel(
+    email: 'email',
+    password: 'password',
+  );
+  const tLoginEntity = LoginEntity(
+    email: 'email',
+    password: 'password',
+  );
+  const tRegisterModel = RegisterModel(
+    email: 'email',
+    password: 'password',
+    name: 'name',
+  );
+  const tRegisterEntity = RegistrationEntity(
+    email: 'email',
+    password: 'password',
+    name: 'name',
+  );
+  const tUserDataModel = UserDataModel(
+    name: 'name',
+    email: 'email',
+  );
+  const tUserDataEntity = UserDataEntity(
+    name: 'name',
+    email: 'email',
+  );
 
   group('LoginImpl', () {
     test('should return unit after successful login', () async {
       //arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when(mockAuthRemoteDataSource.login(tLoginModel))
-          .thenAnswer((_) async => AuthenticatedModel(token: 'token'));
+          .thenAnswer((_) async => const AuthenticatedModel(token: 'token'));
       when(mockAuthLocalDataSource.cacheToken('token'))
           .thenAnswer((_) async => unit);
 
@@ -66,7 +84,8 @@ void main() {
       final result = await authRepositoryImpl.login(tLoginEntity);
 
       //assert
-      expect(result, Left(UnauthorizedFailure(ErrorMessages.forbiddenError)));
+      expect(result,
+          const Left(UnauthorizedFailure(ErrorMessages.forbiddenError)));
     });
     test('should return an server failure after unsuccessful login', () async {
       //arrange
@@ -116,8 +135,10 @@ void main() {
       final result = await authRepositoryImpl.register(tRegisterEntity);
 
       //assert
-      expect(result,
-          Left(UserAlreadyExistsFailure(ErrorMessages.userAlreadyExists)));
+      expect(
+          result,
+          const Left(
+              UserAlreadyExistsFailure(ErrorMessages.userAlreadyExists)));
     });
     test('should return an server failure after unsuccessful login', () async {
       //arrange
@@ -155,7 +176,7 @@ void main() {
       final result = await authRepositoryImpl.getUser();
 
       //assert
-      expect(result, Right(tUserDataEntity));
+      expect(result, const Right(tUserDataEntity));
     });
 
     test('should return an server failure after unsuccessful login', () async {

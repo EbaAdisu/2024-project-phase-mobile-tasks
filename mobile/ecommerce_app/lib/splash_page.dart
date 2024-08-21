@@ -17,9 +17,7 @@ class SplashPage extends StatelessWidget {
 }
 
 class _SplashPage extends StatelessWidget {
-  const _SplashPage({
-    super.key,
-  });
+  const _SplashPage();
 
   @override
   Widget build(BuildContext context) {

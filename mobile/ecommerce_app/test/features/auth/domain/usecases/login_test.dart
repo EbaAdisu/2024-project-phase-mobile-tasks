@@ -16,7 +16,7 @@ void main() {
     loginUsecase = LoginUsecase(mockAuthRepository);
   });
 
-  final tLoginEntity = LoginEntity(
+  const tLoginEntity = LoginEntity(
     email: 'sd@gmail.com',
     password: '123456',
   );
@@ -28,7 +28,8 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       //act
-      final result = await loginUsecase(LoginParams(loginEntity: tLoginEntity));
+      final result =
+          await loginUsecase(const LoginParams(loginEntity: tLoginEntity));
 
       //assert
       expect(result, const Right(unit));
@@ -39,7 +40,8 @@ void main() {
           (_) async => const Left(ServerFailure('test error message')));
 
       //act
-      final result = await loginUsecase(LoginParams(loginEntity: tLoginEntity));
+      final result =
+          await loginUsecase(const LoginParams(loginEntity: tLoginEntity));
 
       //assert
       expect(result, const Left(ServerFailure('test error message')));

@@ -33,8 +33,8 @@ void main() {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => DetailPage(),
-                        settings: RouteSettings(arguments: product),
+                        builder: (BuildContext context) => const DetailPage(),
+                        settings: const RouteSettings(arguments: product),
                       ),
                     );
                   },

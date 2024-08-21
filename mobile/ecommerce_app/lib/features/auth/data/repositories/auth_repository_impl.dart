@@ -59,7 +59,7 @@ class AuthRepositoryImpl extends AuthRepository {
         }
         return const Right(unit);
       } on UnauthorizedException {
-        return Left(UnauthorizedFailure(ErrorMessages.forbiddenError));
+        return const Left(UnauthorizedFailure(ErrorMessages.forbiddenError));
       } on ServerException {
         return const Left(ServerFailure(ErrorMessages.serverError));
       } on SocketException {
@@ -85,7 +85,8 @@ class AuthRepositoryImpl extends AuthRepository {
       } on SocketException {
         return const Left(ConnectionFailure(ErrorMessages.noInternet));
       } on UserAlreadyExistsException {
-        return Left(UserAlreadyExistsFailure(ErrorMessages.userAlreadyExists));
+        return const Left(
+            UserAlreadyExistsFailure(ErrorMessages.userAlreadyExists));
       }
     } else {
       return const Left(ConnectionFailure(ErrorMessages.noInternet));

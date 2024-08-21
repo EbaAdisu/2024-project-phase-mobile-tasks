@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/product_model.dart';
 import '../bloc/product_bloc.dart';
-import '../bloc/product_state.dart';
 import '../bloc/product_event.dart';
+import '../bloc/product_state.dart';
 import '../widgets/product_card.dart';
 
 class HomePage extends StatelessWidget {

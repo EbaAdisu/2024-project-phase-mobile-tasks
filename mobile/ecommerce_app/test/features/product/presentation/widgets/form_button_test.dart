@@ -7,8 +7,8 @@ import 'package:ecommerce_app/features/product/presentation/bloc/product_event.d
 import 'package:ecommerce_app/features/product/presentation/bloc/product_state.dart';
 import 'package:ecommerce_app/features/product/presentation/widgets/form_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Mock classes
@@ -32,12 +32,12 @@ void main() {
   }) {
     return MaterialApp(
       routes: {
-        '/home': (context) => Scaffold(body: Text('Home Page')),
+        '/home': (context) => const Scaffold(body: Text('Home Page')),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/home') {
           return MaterialPageRoute(
-            builder: (context) => Scaffold(body: Text('Home Page')),
+            builder: (context) => const Scaffold(body: Text('Home Page')),
           );
         }
         return null; // Return null if route is not found

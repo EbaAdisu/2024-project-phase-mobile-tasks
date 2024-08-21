@@ -11,12 +11,15 @@ abstract class AuthLocalDataSource {
   Future<Unit> logout();
 }
 
+// ignore: constant_identifier_names
 const TOKEN = 'token';
 
 class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  AuthLocalDataSourceImpl({required this.sharedPreferences});
+  AuthLocalDataSourceImpl({
+    required this.sharedPreferences,
+  });
 
   @override
   Future<Unit> cacheToken(String token) {

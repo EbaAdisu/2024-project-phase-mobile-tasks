@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:ecommerce_app/features/product/presentation/pages/add_page%20copy.dart';
+import 'package:ecommerce_app/features/product/presentation/pages/add_page.dart';
 import 'package:ecommerce_app/features/product/presentation/widgets/form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
