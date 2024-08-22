@@ -42,10 +42,6 @@ class AuthFormButton extends StatelessWidget {
           debugPrint('Button pressed $text');
 
           if (text == 'Sign Up') {
-            debugPrint('Name: ${nameController!.text}');
-            debugPrint('Email: ${emailController!.text}');
-            debugPrint('Password: ${passwordController!.text}');
-            debugPrint('Confirm Password: ${confirmPasswordController!.text}');
             if (formKey.currentState!.validate() &&
                 passwordController!.text == confirmPasswordController!.text) {
               debugPrint('Name: ${nameController!.text}');
@@ -62,22 +58,6 @@ class AuthFormButton extends StatelessWidget {
               // emit RegisterEvent
               BlocProvider.of<AuthBloc>(context)
                   .add(RegisterEvent(registrationEntity: registrationEntity));
-
-              // listen to the state
-              BlocListener<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  debugPrint('AuthBloc state: $state');
-                  if (state is AuthRegisterSuccess) {
-                    Navigator.pushNamed(context, '/sign_in');
-                  } else if (state is AuthError) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.message),
-                      ),
-                    );
-                  }
-                },
-              );
             }
           } else if (text == 'Sign In') {
             if (formKey.currentState!.validate()) {
@@ -93,20 +73,6 @@ class AuthFormButton extends StatelessWidget {
                   .add(LoginEvent(loginEntity: loginEntity));
 
               // listen to the state
-              BlocListener<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  debugPrint('AuthBloc state: $state');
-                  if (state is AuthSuccess) {
-                    Navigator.pushNamed(context, '/home');
-                  } else if (state is AuthError) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.message),
-                      ),
-                    );
-                  }
-                },
-              );
             }
           }
         },

@@ -38,7 +38,8 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
 
   // Data sources
-  locator.registerLazySingleton<Client>(() => ClientImpl(client: locator()));
+  locator.registerLazySingleton<Client>(
+      () => ClientImpl(client: locator(), authLocalDataSource: locator()));
 
   locator.registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(sharedPreferences: locator()));

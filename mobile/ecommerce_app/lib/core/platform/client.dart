@@ -7,6 +7,7 @@ import 'package:http_parser/http_parser.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/error/exception.dart';
+import '../../features/auth/data/datasources/auth_local_data_source.dart';
 import '../../features/product/data/models/product_model.dart';
 
 abstract class Client {
@@ -29,7 +30,11 @@ class HttpResponse {
 
 class ClientImpl extends Client {
   final http.Client client;
-  ClientImpl({required this.client});
+  final AuthLocalDataSource authLocalDataSource;
+  ClientImpl({
+    required this.client,
+    required this.authLocalDataSource,
+  });
 
   @override
   Future<HttpResponse> createProduct(ProductModel product) async {
@@ -47,18 +52,21 @@ class ClientImpl extends Client {
           contentType: MediaType('image', 'jpeg'),
         ),
       );
+      // add header
+      request.headers['authorization'] = await authLocalDataSource.getToken();
     } catch (e) {
       debugPrint('Error adding image file: $e');
       throw ImageUploadException();
     }
 
     var response = await request.send();
-    debugPrint('Create remote data source: ${response.reasonPhrase}');
+    // debugPrint('Create remote data source: ${response.reasonPhrase}');
 
     if (response.statusCode == 201) {
       var responseData = await response.stream.bytesToString();
       ProductModel product =
           ProductModel.fromJson(json.decode(responseData)['data']);
+      debugPrint('Create remote data source: $product');
       return HttpResponse(
         statusCode: response.statusCode,
         body: product,
@@ -72,6 +80,10 @@ class ClientImpl extends Client {
   Future<HttpResponse> deleteProduct(String id) async {
     final response = await client.delete(
       Uri.parse(Urls.productId(id)),
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': await authLocalDataSource.getToken(),
+      },
     );
     if (response.statusCode == 200) {
       return HttpResponse(
@@ -85,7 +97,10 @@ class ClientImpl extends Client {
 
   @override
   Future<HttpResponse> getProduct(String id) async {
-    final response = await client.get(Uri.parse(Urls.productId(id)));
+    final response = await client.get(Uri.parse(Urls.productId(id)), headers: {
+      'Content-Type': 'application/json',
+      'authorization': await authLocalDataSource.getToken(),
+    });
     if (response.statusCode == 200) {
       ProductModel product =
           ProductModel.fromJson(json.decode(response.body)['data']);
@@ -101,7 +116,10 @@ class ClientImpl extends Client {
   @override
   Future<HttpResponse> getProducts() async {
     debugPrint('getProducts remote data source');
-    final response = await client.get(Uri.parse(Urls.product()));
+    final response = await client.get(Uri.parse(Urls.product()), headers: {
+      'Content-Type': 'application/json',
+      'authorization': await authLocalDataSource.getToken(),
+    });
     // debugPrint(
     //     'getProducts remote data source response: ${json.decode(response.body)['data']}');
     if (response.statusCode == 200) {
@@ -126,7 +144,10 @@ class ClientImpl extends Client {
         Urls.productId(product.id),
       ),
       body: jsonEncode(product.toJson()),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': await authLocalDataSource.getToken(),
+      },
     );
     if (response.statusCode == 200) {
       ProductModel product =

@@ -25,6 +25,8 @@ class AuthFormTextField extends StatelessWidget {
         const SizedBox(height: 10),
         TextFormField(
           controller: controller,
+          obscureText:
+              text == 'Password' || text == 'Confirm Password' ? false : false,
           validator: (value) => value!.isEmpty ? 'Please enter a $text' : null,
           keyboardType:
               text == 'price' ? TextInputType.number : TextInputType.text,

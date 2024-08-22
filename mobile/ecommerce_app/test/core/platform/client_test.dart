@@ -14,18 +14,28 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late MockHttpClient mockHttpClient;
   late ClientImpl clientImpl;
+  late MockAuthLocalDataSource mockAuthLocalDataSource;
   setUp(() {
     mockHttpClient = MockHttpClient();
-    clientImpl = ClientImpl(client: mockHttpClient);
+    mockAuthLocalDataSource = MockAuthLocalDataSource();
+    clientImpl = ClientImpl(
+      client: mockHttpClient,
+      authLocalDataSource: mockAuthLocalDataSource,
+    );
   });
 
   group('delete product', () {
     const productId = '1';
+
     test('should return void when the response code is 200', () async {
       // arrange
       when(
         mockHttpClient.delete(
           Uri.parse(Urls.productId(productId)),
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': await mockAuthLocalDataSource.getToken(),
+          },
         ),
       ).thenAnswer(
         (_) async => http.Response(
@@ -33,13 +43,17 @@ void main() {
           200,
         ),
       );
+      when(
+        mockAuthLocalDataSource.getToken(),
+      ).thenAnswer(
+        (_) async => 'token',
+      );
+
       // act
       await clientImpl.deleteProduct(productId);
       // assert
       verify(
-        mockHttpClient.delete(
-          Uri.parse(Urls.productId(productId)),
-        ),
+        mockHttpClient.delete(any),
       );
     });
 

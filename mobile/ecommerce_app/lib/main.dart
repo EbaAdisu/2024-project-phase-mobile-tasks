@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc_observer.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/pages/sign_in_page.dart';
 import 'features/auth/presentation/pages/sign_up_page.dart';
@@ -16,6 +17,7 @@ import 'splash_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setUpLocator();
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Ecommerce App',
-        initialRoute: '/',
+        initialRoute: '/home',
         onGenerateRoute: (RouteSettings settings) {
           WidgetBuilder builder;
           // Match your route names here

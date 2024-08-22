@@ -33,7 +33,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   Future<ProductModel> createProduct(ProductModel product) async {
     try {
       HttpResponse result = await client.createProduct(product);
-      return ProductModel.fromJson(result.body);
+      debugPrint('ProductRemoteDataSourceImpl.createProduct: ${result.body}');
+      return result.body;
     } catch (e) {
       debugPrint('Error adding image file: $e');
       rethrow;
